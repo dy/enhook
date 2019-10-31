@@ -1,11 +1,10 @@
 # enhook
 
-Enable hooks for a function via react/preact/etc mechanics.
+Enable hooks for a function via react/preact or other hooks provider, available in deps.
 
 ```js
 import hooked from 'enhook'
 import { useState, useEffect } from 'preact/hooks'
-import { render, h } from 'preact'
 
 let f = hooked(initCount => {
   let [count, setCount] = useState(initCount)
@@ -19,4 +18,19 @@ let f = hooked(initCount => {
 })
 
 f(0)
+```
+
+## Examples
+
+Functional custom elements (aka [haunted](https://ghub.io/haunted)/[remount](https://ghub.io/remount))
+
+```js
+import hooked from 'enhook'
+import { html, render } from 'lit-html'
+
+function MyComponent () {
+  render(html`Hello, ${ this.username }`, this)
+}
+
+customElements.define('my-component', class { constructor () { hooked(MyComponent).call(this) } })
 ```

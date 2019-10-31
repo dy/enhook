@@ -11,7 +11,7 @@ export default function enhook (fn) {
     throw Error('`{ render, h }` must be provided either via installed react/preact/etc or via enhook.bind({ render, h }).')
   }
 
-  // cache by the fn
+  // FIXME: cache by the fn
   if (cache.has(fn)) return cache.get(fn)
 
   // FIXME: cache by last stacktrace entry
@@ -27,5 +27,7 @@ export default function enhook (fn) {
     namespaceURI: "http://www.w3.org/1999/xhtml"
   }
 
-  _render(_h(() => (fn(), null)), stub)
+  return function hooked () {
+    _render(_h(() => (fn.call(this), null)), stub)
+  }
 }

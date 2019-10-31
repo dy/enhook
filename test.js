@@ -9,10 +9,11 @@ import { useState } from 'preact/hooks'
 
 let f = hook((init) => {
   let [ count, setCount ] = useState(0)
+  console.log(count)
   setTimeout(() => {
     setCount(++count)
   }, 1000)
-})
+})(0)
 
 // t('basics', t => {
 //   let log = []
