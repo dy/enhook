@@ -1,0 +1,43 @@
+{
+  "name": "enhook",
+  "version": "1.0.0",
+  "description": "Enable hooks for any function",
+  "main": "index.js",
+  "dependencies": {
+
+  },
+  "peerDependencies": {
+    "preact": "*",
+    "react": "*",
+    "react-dom": "*",
+    "augmentor": "*"
+  },
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "preact": "^10.0.4",
+    "tape": "^4.11.0"
+  },
+  "scripts": {
+    "test": "node -r esm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dy/enhook.git"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "use-state",
+    "use-effect",
+    "augmentor",
+    "preact",
+    "hook",
+    "use"
+  ],
+  "author": "Dmitry Ivanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dy/enhook/issues"
+  },
+  "homepage": "https://github.com/dy/enhook#readme"
+}
