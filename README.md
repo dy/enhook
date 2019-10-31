@@ -12,7 +12,7 @@ let f = hooked(initCount => {
 
   setTimeout(() => {
     setCount(count++)
-  })
+  }, 1000)
 
   // any side-effects
   useEffect(() => console.log(count), [count])
