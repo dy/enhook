@@ -8,6 +8,7 @@
     "preact": "*",
     "react": "*",
     "react-dom": "*",
+    "tng-hooks": "*",
     "augmentor": "*"
   },
   "devDependencies": {
