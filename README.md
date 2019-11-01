@@ -23,16 +23,16 @@ countFrom(0)
 
 _Enhook_ turns any function into reactive function with enabled hooks.
 
-Hooks mechanism is detected from any available provider in the following order:
+Hooks mechanism is detected from any available provider library in the following order:
 
-* [preact](https://ghub.io/preact)
-* [react](https://ghub.io/react)
-* [react-test-renderer](https://reactjs.org/docs/shallow-renderer.html)
-* [rax](https://ghub.io/rax)
-* [augmentor](https://ghub.io/augmentor)
+* [`preact`](https://ghub.io/preact)
+* [`react`](https://ghub.io/react)
+* [`react-test-renderer`](https://reactjs.org/docs/shallow-renderer.html)
+* [`rax`](https://ghub.io/rax)
+* [`augmentor`](https://ghub.io/augmentor)
 
 
-Optionally, target lib entry can be used directly as:
+Target lib hooks can also be used directly as:
 
 ```js
 import enableRaxHooks, { useState, useEffect } from 'enhook/rax'
@@ -54,7 +54,7 @@ let counter = enableHooks(init => {
 counter(1)
 ```
 
-_Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks, just aliases to detected library hooks.
+_Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks, aliases to detected library hooks.
 
 
 ## Use-cases
