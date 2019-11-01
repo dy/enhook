@@ -1,5 +1,5 @@
 import t from 'tape'
-import { idle, frame, time } from 'wait-please'
+import { idle, frame, time, tick } from 'wait-please'
 
 
 // import { TNG, useState } from 'tng-hooks'
@@ -73,6 +73,7 @@ t('augmentor', async t => {
   t.end()
 })
 
+// FIXME: has a bit diverging API
 t.skip('tng', async t => {
   let hooks = await import('./tng.js')
   await testHooks(hooks, t)
@@ -81,4 +82,20 @@ t.skip('tng', async t => {
 
 t.skip('Example 1', t => {
   // TODO
+})
+
+t('survival', async t => {
+  let { default: hooked, useEffect } = await import('./preact.js')
+
+  let count = 0
+  let f = hooked(
+    () => useEffect(() => count++)
+  )
+  let N = 1e6
+  for (let i = N; i--;) { f() }
+
+  await idle()
+  t.is(count, N)
+
+  t.end()
 })
