@@ -1,4 +1,4 @@
-# enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-experimental-yellow.svg)](http://github.com/badges/stability-badges)
+# enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](http://github.com/badges/stability-badges)
 
 Enable react/preact/∀ hooks everywhere.
 
@@ -45,7 +45,6 @@ import { render, h, useState, useEffect } from 'red-lights'
 import enhook from 'enhook'
 
 let enableHooks = enhook.bind({ render, h })
-
 let reactiveFn = enableHooks(init => /* ... */)
 ```
 
@@ -154,11 +153,22 @@ render(html`<${CounterApp}/>`, document.getElementById('app'))
 ``` -->
 
 
-<!-- ### 5. Readable stream, generator, async iterable, observer etc.
+### 5. Stream / observable / async iterators etc.
 
 ```js
-``` -->
+import hooked, { useEffect } from 'enhook'
 
+let observable = new Observable(hooked(observer => {
+  // ...calculating code
+
+  useEffect(() => {
+    // push changes into observable
+    observer.next(deps)
+  }, deps)
+
+  return () => {} // destruct
+})
+```
 
 ## Similar art
 
