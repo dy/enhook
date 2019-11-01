@@ -1,10 +1,7 @@
-let h, render, hooks
+import { render, h, useState, useEffect, useMemo } from './src/provider/preact.js'
+import hooker from './src/enhook.js'
 
-try { lib = require('preact') } catch (e) { }
-if (lib) {
-  h = lib.h
-  render = lib.render
-  hooks = require('preact/hooks')
-}
+if (!render || !h) throw Error('`preact` must be installed in deps.')
 
-export { h, render, hooks }
+export default hooker.bind({ render, h })
+export { useState, useEffect, useMemo }

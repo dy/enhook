@@ -1,5 +1,7 @@
 const cache = new WeakMap
 
+let doc = typeof document !== 'undefined' ? document : null
+
 export default function enhook(fn) {
   if (cache.has(fn)) return cache.get(fn)
 
@@ -8,21 +10,32 @@ export default function enhook(fn) {
   // FIXME: cache by last stacktrace entry
 
   // minimal dom-node compatible stub required by react-like libs
-  let stub = {
+  let holder = !doc ? {
     nodeType: 1,
     firstChild: null,
     tagName: 'div',
     lastChild: null,
     childNodes: [],
     ownerSVGElement: null,
-    namespaceURI: "http://www.w3.org/1999/xhtml"
-  }
+    namespaceURI: "http://www.w3.org/1999/xhtml",
+    appendChild: () => {},
+    replaceChild: () => {}
+  } : document.createDocumentFragment()
+  // stub = new Proxy(document.createElement('div'), { get(target, name) { console.log(target[name]); return target[name] } })
+  // stub = document.createDocumentFragment()
 
-  cache.set(fn, hooked)
+  cache.set(fn, enhookedFunction)
 
-  return hooked
+  return enhookedFunction
 
-  function hooked(...args) {
-    _render(_h(() => (fn.call(this, ...args), null)), stub)
+  function enhookedFunction(...args) {
+    let result
+
+    render(h(() => {
+      result = fn.call(this, ...args)
+      return null
+    }), holder)
+
+    return result
   }
 }

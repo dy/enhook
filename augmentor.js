@@ -1,11 +1,7 @@
-let render, h, hooks
+import { render, h, useState, useEffect, useMemo } from './src/provider/augmentor.js'
+import hooker from './src/enhook.js'
 
-try { lib = require('augmentor') } catch (e) { }
-if (lib) {
-  let augmentor = lib.default
-  h = fn => fn
-  render = (what, where) => augmentor(what)
-  hooks = lib
-}
+if (!render || !h) throw Error('`augmentor` must be installed in deps.')
 
-export { render, h, hooks }
+export default hooker.bind({ render, h })
+export { useState, useEffect, useMemo }

@@ -11,12 +11,27 @@
     "augmentor": "*"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
+    "augmentor": "^0.2.6",
+    "browser-env": "^3.2.6",
+    "driver-dom": "^2.0.2",
+    "driver-universal": "^2.0.1",
     "esm": "^3.2.25",
     "preact": "^10.0.4",
-    "tape": "^4.11.0"
+    "rax": "^1.0.13",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-test-renderer": "^16.11.0",
+    "tape": "^4.11.0",
+    "wait-please": "^1.0.0"
   },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "scripts": {
-    "test": "node -r esm test"
+    "start": "parcel serve test.html",
+    "test": "node -r esm -r ./browser-env test"
   },
   "repository": {
     "type": "git",

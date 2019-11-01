@@ -1,11 +1,11 @@
-# unihooks [![Build Status](https://travis-ci.org/dy/unihooks.svg?branch=master)](https://travis-ci.org/dy/unihooks) [![unstable](https://img.shields.io/badge/stability-experimental-yellow.svg)](http://github.com/badges/stability-badges)
+# enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-experimental-yellow.svg)](http://github.com/badges/stability-badges)
 
-Enable react/preact hooks anywhere.
+Enable react/preact hooks everywhere.
 
-[![NPM](https://nodei.co/npm/unihooks.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/unihooks/)
+[![NPM](https://nodei.co/npm/enhook.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/enhook/)
 
 ```js
-import enableHooks, { useState, useEffect } from 'unihooks'
+import enableHooks, { useState, useEffect } from 'enhook'
 
 let countFrom = enableHooks(initCount => {
   let [count, setCount] = useState(initCount)
@@ -21,13 +21,13 @@ let countFrom = enableHooks(initCount => {
 countFrom(0)
 ```
 
-_Unihooks_ turns any function into hooks-enabled.
+_Enhook_ turns any function into reactive function with enabled hooks.
 
-Hook providers are detected in the following order:
+Hooks mechanism is detected from any available provider in the following order:
 
 * [preact](https://ghub.io/preact)
 * [react](https://ghub.io/react)
-* [react-test-renderer](https://ghub.io/react)
+* [react-test-renderer](https://reactjs.org/docs/shallow-renderer.html)
 * [rax](https://ghub.io/rax)
 * [augmentor](https://ghub.io/augmentor)
 
@@ -35,24 +35,26 @@ Hook providers are detected in the following order:
 Optionally, target lib entry can be used directly as:
 
 ```js
-import enableRaxHooks, { useState, useEffect } from 'unihooks/rax'
+import enableRaxHooks, { useState, useEffect } from 'enhook/rax'
 ```
 
 Custom hooks provider can be registered as:
 
 ```js
-import { render, h, useState, useEffect } from 'red-lights-framework'
-import unihooks from 'unihooks'
+import { render, h, useState, useEffect } from 'red-lights'
+import enhook from 'enhook'
 
-let hooked = unihooks.bind({ render, h })
+let enableHooks = enhook.bind({ render, h })
 
-let counter = hooked(init => {
+let counter = enableHooks(init => {
   let [count, setCount] = useState(init)
   useEffect(() => setTimeout(() => setCount(++count), 1000), [count])
 })
 
 counter(1)
 ```
+
+_Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks, just aliases to detected library hooks.
 
 
 ## Use-cases
@@ -62,7 +64,7 @@ counter(1)
 Organize non-DOM reactions with existing react hooks.
 
 ```js
-import hooked from 'unihooks'
+import hooked from 'enhook'
 import { useRoute } from 'wouter'
 
 let observeRoute = hooked((route, callback) => {
@@ -82,7 +84,7 @@ observeRoute('/org/:id', ({ id }) => {})
 Make function-controlled custom elements à la [haunted](https://ghub.io/haunted) or [remount](https://ghub.io/remount).
 
 ```js
-import hooked from 'unihooks'
+import hooked from 'enhook'
 import { html, render } from 'lit-html'
 import useSWR from 'swr'
 
@@ -104,7 +106,7 @@ customElements.define('my-component', class { constructor () { hooked(MyComponen
 Make class methods support hooks, even react components themselves.
 
 ```js
-import hooked from 'unihooks'
+import hooked from 'enhook'
 import { Component } from 'react'
 
 class MyComponent extends Component {
@@ -117,6 +119,50 @@ class MyComponent extends Component {
 }
 MyComponent.prototype.render = hooked(MyComponent.prototype.render)
 ```
+
+<!-- ### 4. Functional components reactive framework
+
+Hyperscript with functional components would look like:
+
+```js
+// nanoreact.js
+import htm from 'htm'
+import hooky from 'enhook'
+import morph from 'nanomorph'
+import h from 'hyperscript'
+import { usePrev } from 'nanohook'
+
+const html = htm.bind((tag, props, ...children) => {
+  if (typeof tag === 'function') return hooky(props => {
+    return morph(prev, tag(props))
+  })({ children, ...props })
+
+  return h(tag, props, ...children)
+})
+
+const render = (what, where) => morph(where, what)
+
+export { html, render }
+```
+
+```js
+// app.js
+import { useState, useEffect, html, render } from './nanoreact'
+
+function CounterApp () {
+  let [count, setCount] = useState(0)
+
+  return html`<div>${ count }</div>`
+}
+
+render(html`<${CounterApp}/>`, document.getElementById('app'))
+``` -->
+
+
+<!-- ### 5. Readable stream, generator, async iterable, observer etc.
+
+```js
+``` -->
 
 
 ## Similar art

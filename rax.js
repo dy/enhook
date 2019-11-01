@@ -1,17 +1,7 @@
-let h, render, hooks, lib, driver
+import { render, h, useState, useEffect, useMemo } from './src/provider/rax.js'
+import hooker from './src/enhook.js'
 
-try { lib = require('rax') } catch (e) { }
-try { driver = require('driver-universal') } catch (e) { }
-if (!driver) { try { driver = require('driver-dom') } catch (e) { } }
-if (!driver) { try { driver = require('driver-worker') } catch (e) { } }
-if (!driver) { try { driver = require('driver-weex') } catch (e) { } }
-if (!driver) { try { driver = require('driver-webgl') } catch (e) { } }
+if (!render || !h) throw Error('`rax` and any `driver-*` must be installed in deps.')
 
-if (lib) {
-  let
-  h = lib.h
-  render = (what, where) => lib.render(what, where, { driver })
-  hooks = lib
-}
-
-export { h, render, hooks }
+export default hooker.bind({ render, h })
+export { useState, useEffect, useMemo }
