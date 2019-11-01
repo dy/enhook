@@ -1,4 +1,4 @@
-let h, render, useMemo, useState, useEffect, lib, driver
+let h, render, lib, driver, useState, useReducer, useEffect, useMemo, useCallback, useRef
 
 try { lib = require('rax') } catch (e) { }
 try { driver = require('driver-dom') } catch (e) { }
@@ -12,9 +12,12 @@ if (lib) {
   h = lib.createElement
   render = (what, where) => lib.render(what, where, { driver })
 
-  useEffect = lib.useEffect
   useState = lib.useState
+  useReducer = lib.useReducer
+  useEffect = lib.useEffect
   useMemo = lib.useMemo
+  useCallback = lib.useCallback
+  useRef = lib.useRef
 }
 
-export { h, render, useEffect, useState, useMemo }
+export { h, render, useState, useReducer, useEffect, useMemo, useCallback, useRef }

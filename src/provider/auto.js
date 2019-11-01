@@ -4,13 +4,14 @@
 import * as preact from './preact'
 import * as react from './react'
 import * as rax from './rax'
+import * as tng from './tng'
 import * as augmentor from './augmentor'
 
 const winner = preact.render ? preact :
   react.render ? react :
   rax.render ? rax :
-  augmentor.render ? augmentor : null
+  augmentor.enhook ? augmentor :
+  tng.enhook ? tng : null
 
-const { render, h, useState, useEffect, useMemo } = winner
-
-export { render, h, useState, useEffect, useMemo }
+const { render, h, enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef } = winner
+export { render, h, enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef }

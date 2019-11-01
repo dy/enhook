@@ -1,4 +1,4 @@
-import { render, h, useState, useEffect, useMemo } from './src/provider/preact.js'
+import { render, h, useState, useReducer, useEffect, useMemo, useCallback, useRef } from './src/provider/auto.js'
 import hooker from './src/enhook.js'
 
 export default function enhook(...args) {
@@ -9,4 +9,4 @@ export default function enhook(...args) {
   return hooker.call({ render, h }, ...args)
 }
 
-export { useState, useEffect, useMemo }
+export { useState, useReducer, useEffect, useMemo, useCallback, useRef }

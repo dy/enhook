@@ -1,20 +1,19 @@
 import t from 'tape'
-import { idle, frame } from 'wait-please'
-
-// import { useState } from 'preact/hooks'
-// import { h, render } from 'preact'
-// import { createElement as h, useState } from 'react'
-// import { render } from 'react-dom'
-// import { render, createElement as h } from 'rax'
+import { idle, frame, time } from 'wait-please'
 
 
-// let f = hook((init) => {
+// import { TNG, useState } from 'tng-hooks'
+// let f = TNG((init) => {
 //   let [ count, setCount ] = useState(0)
-//   console.log(count)
 //   setTimeout(() => {
+//     console.log(count)
 //     setCount(++count)
 //   }, 1000)
-// })(0)
+// })
+// f(0)
+
+
+
 
 async function testHooks (hooks, t) {
   let enhook = hooks.default
@@ -38,6 +37,7 @@ async function testHooks (hooks, t) {
   t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, 0])
 
   await frame(4)
+  // f.call({ foo: 1 }, { bar: 2 })
 
   t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, 0, { foo: 1 }, { bar: 2 }, 1])
 }
@@ -68,6 +68,12 @@ t('rax', async t => {
 
 t('augmentor', async t => {
   let hooks = await import('./augmentor.js')
+  await testHooks(hooks, t)
+  t.end()
+})
+
+t.skip('tng', async t => {
+  let hooks = await import('./tng.js')
   await testHooks(hooks, t)
   t.end()
 })

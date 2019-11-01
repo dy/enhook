@@ -5,7 +5,10 @@ let doc = typeof document !== 'undefined' ? document : null
 export default function enhook(fn) {
   if (cache.has(fn)) return cache.get(fn)
 
-  let { h, render } = this
+  let { h, render, enhook } = this
+
+  // direct call, as in augmentor/tng-hooks case`
+  if (enhook) return enhook(fn)
 
   // FIXME: cache by last stacktrace entry
 
@@ -21,8 +24,6 @@ export default function enhook(fn) {
     appendChild: () => {},
     replaceChild: () => {}
   } : document.createDocumentFragment()
-  // stub = new Proxy(document.createElement('div'), { get(target, name) { console.log(target[name]); return target[name] } })
-  // stub = document.createDocumentFragment()
 
   cache.set(fn, enhookedFunction)
 
@@ -30,11 +31,7 @@ export default function enhook(fn) {
 
   function enhookedFunction(...args) {
     let result
-
-    render(h(() => {
-      result = fn.call(this, ...args)
-      return null
-    }), holder)
+    render(h(() => (result = fn.call(this, ...args), null)), holder)
 
     return result
   }

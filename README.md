@@ -28,6 +28,7 @@ Hooks mechanism is detected from any available provider library in the following
 * [`react`](https://ghub.io/react)
 * [`rax`](https://ghub.io/rax)
 * [`augmentor`](https://ghub.io/augmentor)
+* [`tng-hooks`](https://ghub.io/tng-hooks) (manual call API)
 
 
 Target lib hooks can also be used directly as:
@@ -174,9 +175,10 @@ let observable = new Observable(hooked(observer => {
 
 ## Similar art
 
-* [augmentor](https://ghub.io/augmentor) - react-like hooks, react-incompatible.
-<!-- * [any-observable](https://ghub.io/any-observable) -  -->
+* [augmentor](https://ghub.io/augmentor) - react-like hooks from @webreflection.
+* [tng-hooks](https://ghub.io/tng-hooks) - another react-inspired hooks library, not compatible with react.
 
+<!-- * [any-observable](https://ghub.io/any-observable) -  -->
 
 ## License
 

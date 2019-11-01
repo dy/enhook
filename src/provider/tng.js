@@ -1,8 +1,8 @@
 let enhook, lib, useState, useReducer, useEffect, useMemo, useCallback, useRef
 
-try { lib = require('augmentor') } catch (e) { }
+try { lib = require('tng-hooks') } catch (e) { }
 if (lib) {
-  enhook = lib.default
+  enhook = lib.TNG
   useState = lib.useState
   useReducer = lib.useReducer
   useEffect = lib.useEffect

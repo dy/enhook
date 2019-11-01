@@ -1,25 +1,20 @@
-let h, render, useState, useEffect, useMemo
+let h, render, useState, useReducer, useEffect, useMemo, useCallback, useRef
 
 let lib
 try { lib = require('react') } catch (e) { }
 if (lib) {
   h = lib.createElement
-  useEffect = lib.useEffect
+
   useState = lib.useState
+  useReducer = lib.useReducer
+  useEffect = lib.useEffect
   useMemo = lib.useMemo
+  useCallback = lib.useCallback
+  useRef = lib.useRef
 }
 
 let renderer
 try { renderer = require('react-dom') } catch (e) { }
 if (renderer) render = renderer.render
-// else {
-  // let Renderer
-  // try { Renderer = require('react-test-renderer/shallow') } catch (e) {}
-  // if (Renderer) {
-  //   renderer = new Renderer()
-  //   render = (what, where) => renderer.render(what)
-  // }
-// }
 
-
-export { h, render, useEffect, useMemo, useState }
+export { h, render, useState, useReducer, useEffect, useMemo, useCallback, useRef }
