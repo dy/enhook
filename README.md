@@ -32,11 +32,26 @@ Hook providers are detected in the following order:
 * [augmentor](https://ghub.io/augmentor)
 
 
-Optionally, target provider entry can be used directly:
+Optionally, target lib entry can be used directly as:
 
 ```js
-import raxHooks from 'enhook/rax'
-import reactHooks from 'enhook/react'
+import enableRaxHooks, { useState, useEffect } from 'enhook/rax'
+```
+
+Custom hooks provider can be registered as:
+
+```js
+import { render, h, useState, useEffect } from 'red-lights-framework'
+import enhook from 'enhook/register'
+
+let enableHooks = enhook.bind({ render, h })
+
+let counter = enableHooks(init => {
+  let [count, setCount] = useState(init)
+  useEffect(() => setTimeout(() => setCount(++count), 1000), [count])
+})
+
+counter(1)
 ```
 
 
