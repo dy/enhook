@@ -2,7 +2,7 @@
 
 Enable react/preact/∀ hooks everywhere.
 
-[![NPM](https://nodei.co/npm/enhook.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/enhook/)
+[![NPM](https://nodei.co/npm/enhook.png?mini=true)](https://nodei.co/npm/enhook/)
 
 ```js
 import enableHooks, { useState, useEffect } from 'enhook'
