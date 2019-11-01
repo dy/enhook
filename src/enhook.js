@@ -27,12 +27,20 @@ export default function enhook(fn) {
 
   cache.set(fn, enhookedFunction)
 
-  return enhookedFunction
+  let currentResult
+
+  function Component ({ args, ctx }) {
+    currentResult = fn.call(ctx, ...args)
+    return null
+  }
 
   function enhookedFunction(...args) {
-    let result
-    render(h(() => (result = fn.call(this, ...args), null)), holder)
-
+    let prevResult = currentResult
+    render(h(Component, { ctx: this, args }), holder)
+    let result = currentResult
+    currentResult = prevResult
     return result
   }
+
+  return enhookedFunction
 }

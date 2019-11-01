@@ -3,7 +3,8 @@ import { idle, frame, time } from 'wait-please'
 
 
 // import { TNG, useState } from 'tng-hooks'
-// let f = TNG((init) => {
+// import hooked, { useState } from '.'
+// let f = hooked((init) => {
 //   let [ count, setCount ] = useState(0)
 //   setTimeout(() => {
 //     console.log(count)
@@ -36,8 +37,8 @@ async function testHooks (hooks, t) {
   f.call({ foo: 1 }, { bar: 2 })
   t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, 0])
 
-  await frame(4)
-  // f.call({ foo: 1 }, { bar: 2 })
+  // not sure why preact prefers 3 frames
+  await frame(3)
 
   t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, 0, { foo: 1 }, { bar: 2 }, 1])
 }
