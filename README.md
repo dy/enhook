@@ -26,7 +26,6 @@ Hooks mechanism is detected from any available provider library in the following
 
 * [`preact`](https://ghub.io/preact)
 * [`react`](https://ghub.io/react)
-<!-- * [`react-test-renderer`](https://reactjs.org/docs/shallow-renderer.html) -->
 * [`rax`](https://ghub.io/rax)
 * [`augmentor`](https://ghub.io/augmentor)
 
@@ -53,7 +52,7 @@ let counter = enableHooks(init => {
 counter(1)
 ```
 
-_Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks, aliases to detected library hooks.
+_Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks as aliases to library hooks.
 
 
 ## Use-cases
