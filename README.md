@@ -49,7 +49,7 @@ let enableHooks = enhook.bind({ render, h })
 let reactiveFn = enableHooks(init => /* ... */)
 ```
 
-_Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks as aliases to library hooks.
+_Enhook_ by default exports `useState`, `useEffect`, `useReducer`, `useCallback`, `useMemo` and `useRef` hooks as aliases to library hooks.
 
 
 ## Use-cases
