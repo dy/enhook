@@ -22,12 +22,11 @@ countFrom(0)
 ```
 
 _Enhook_ turns any function into reactive function with enabled hooks.
-
 Hooks mechanism is detected from any available provider library in the following order:
 
 * [`preact`](https://ghub.io/preact)
 * [`react`](https://ghub.io/react)
-* [`react-test-renderer`](https://reactjs.org/docs/shallow-renderer.html)
+<!-- * [`react-test-renderer`](https://reactjs.org/docs/shallow-renderer.html) -->
 * [`rax`](https://ghub.io/rax)
 * [`augmentor`](https://ghub.io/augmentor)
 
