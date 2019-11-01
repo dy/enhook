@@ -1,6 +1,6 @@
 # enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-experimental-yellow.svg)](http://github.com/badges/stability-badges)
 
-Enable react/preact hooks everywhere.
+Enable react/preact/∀ hooks everywhere.
 
 [![NPM](https://nodei.co/npm/enhook.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/enhook/)
 
