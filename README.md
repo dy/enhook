@@ -114,7 +114,9 @@ class MyComponent extends Component {
 MyComponent.prototype.render = hooked(MyComponent.prototype.render)
 ```
 
-<!-- ### 4. Functional components reactive framework
+### 4. [wait for it]
+<!--
+### 4. Functional components reactive framework
 
 Hyperscript with functional components would look like:
 
