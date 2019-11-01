@@ -1,13 +1,13 @@
-# enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-experimental-yellow.svg)](http://github.com/badges/stability-badges)
+# unihooks [![Build Status](https://travis-ci.org/dy/unihooks.svg?branch=master)](https://travis-ci.org/dy/unihooks) [![unstable](https://img.shields.io/badge/stability-experimental-yellow.svg)](http://github.com/badges/stability-badges)
 
 Enable react/preact hooks anywhere.
 
-[![NPM](https://nodei.co/npm/enhook.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/enhook/)
+[![NPM](https://nodei.co/npm/unihooks.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/unihooks/)
 
 ```js
-import hooked, { useState, useEffect } from 'enhook'
+import enableHooks, { useState, useEffect } from 'unihooks'
 
-let countFrom = hooked(initCount => {
+let countFrom = enableHooks(initCount => {
   let [count, setCount] = useState(initCount)
 
   setTimeout(() => {
@@ -21,7 +21,7 @@ let countFrom = hooked(initCount => {
 countFrom(0)
 ```
 
-Enhook turns any function into hooks-enabled.
+_Unihooks_ turns any function into hooks-enabled.
 
 Hook providers are detected in the following order:
 
@@ -35,18 +35,18 @@ Hook providers are detected in the following order:
 Optionally, target lib entry can be used directly as:
 
 ```js
-import enableRaxHooks, { useState, useEffect } from 'enhook/rax'
+import enableRaxHooks, { useState, useEffect } from 'unihooks/rax'
 ```
 
 Custom hooks provider can be registered as:
 
 ```js
 import { render, h, useState, useEffect } from 'red-lights-framework'
-import enhook from 'enhook/register'
+import unihooks from 'unihooks'
 
-let enableHooks = enhook.bind({ render, h })
+let hooked = unihooks.bind({ render, h })
 
-let counter = enableHooks(init => {
+let counter = hooked(init => {
   let [count, setCount] = useState(init)
   useEffect(() => setTimeout(() => setCount(++count), 1000), [count])
 })
@@ -62,7 +62,7 @@ counter(1)
 Organize non-DOM reactions with existing react hooks.
 
 ```js
-import hooked from 'enhook'
+import hooked from 'unihooks'
 import { useRoute } from 'wouter'
 
 let observeRoute = hooked((route, callback) => {
@@ -82,7 +82,7 @@ observeRoute('/org/:id', ({ id }) => {})
 Make function-controlled custom elements à la [haunted](https://ghub.io/haunted) or [remount](https://ghub.io/remount).
 
 ```js
-import hooked from 'enhook'
+import hooked from 'unihooks'
 import { html, render } from 'lit-html'
 import useSWR from 'swr'
 
@@ -104,7 +104,7 @@ customElements.define('my-component', class { constructor () { hooked(MyComponen
 Make class methods support hooks, even react components themselves.
 
 ```js
-import hooked from 'enhook'
+import hooked from 'unihooks'
 import { Component } from 'react'
 
 class MyComponent extends Component {
