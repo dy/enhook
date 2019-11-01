@@ -34,6 +34,8 @@ Target lib hooks can also be used directly as:
 
 ```js
 import enableRaxHooks, { useState, useEffect } from 'enhook/rax'
+
+let reactiveFn = enableRaxHooks(init => /* ...reactive code */)
 ```
 
 Custom hooks provider can be registered as:
@@ -44,12 +46,7 @@ import enhook from 'enhook'
 
 let enableHooks = enhook.bind({ render, h })
 
-let counter = enableHooks(init => {
-  let [count, setCount] = useState(init)
-  useEffect(() => setTimeout(() => setCount(++count), 1000), [count])
-})
-
-counter(1)
+let reactiveFn = enableHooks(init => /* ... */)
 ```
 
 _Enhook_ by default exports `useMemo`, `useEffect` and `useMemo` hooks as aliases to library hooks.
