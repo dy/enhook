@@ -1,6 +1,6 @@
 import t from 'tape'
-import { idle, frame, time, tick } from 'wait-please'
-
+import { frame, time, tick } from 'wait-please'
+// import setImmediate from 'immediate'
 
 // import { TNG, useState } from 'tng-hooks'
 // import hooked, { useState } from '.'
@@ -84,17 +84,30 @@ t.skip('Example 1', t => {
   // TODO
 })
 
+function idle(n=1) {
+  return new Promise(ok => {
+    let count = 0
+    f()
+    function f() {
+      if (count === n) return ok()
+      count++
+      setImmediate(f)
+    }
+  })
+}
+
 t('survival', async t => {
   let { default: hooked, useEffect } = await import('./preact.js')
 
   let count = 0
   let f = hooked(
-    () => useEffect(() => count++)
+    () => useEffect(() => {count++})
   )
   let N = 1e6
   for (let i = N; i--;) { f() }
 
-  await idle()
+  await frame(3)
+
   t.is(count, N)
 
   t.end()

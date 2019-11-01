@@ -27,7 +27,7 @@
     "react-test-renderer": "^16.11.0",
     "tape": "^4.11.0",
     "tng-hooks": "^4.1.5",
-    "wait-please": "^1.0.0"
+    "wait-please": "^1.1.0"
   },
   "browserslist": [
     "last 1 Chrome versions"
