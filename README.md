@@ -173,6 +173,10 @@ let observable = new Observable(hooked(observer => {
 })
 ```
 
+## See also
+
+* [remorph](https://github.com/dy/remorph) - react/preact-based DOM morphing.
+
 ## Similar art
 
 * [augmentor](https://ghub.io/augmentor) - react-like hooks from @webreflection.
