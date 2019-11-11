@@ -4,13 +4,6 @@
   "description": "Enable react/preact hooks everywhere",
   "main": "index.js",
   "dependencies": {},
-  "peerDependencies": {
-    "preact": "*",
-    "react": "*",
-    "react-dom": "*",
-    "tng-hooks": "*",
-    "augmentor": "*"
-  },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
