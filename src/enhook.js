@@ -2,7 +2,7 @@ const cache = new WeakMap
 
 let doc = typeof document !== 'undefined' ? document : null
 
-export default function enhook(fn) {
+module.exports = function enhook(fn) {
   if (cache.has(fn)) return cache.get(fn)
 
   let { h, render } = this

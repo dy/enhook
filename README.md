@@ -1,6 +1,6 @@
 # enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](http://github.com/badges/stability-badges)
 
-Enable react/preact/∀ hooks everywhere.
+Enable react/preact/∀ hooks for regular functions.
 
 [![NPM](https://nodei.co/npm/enhook.png?mini=true)](https://nodei.co/npm/enhook/)
 
@@ -21,10 +21,10 @@ let countFrom = enableHooks(initCount => {
 countFrom(0)
 ```
 
-_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks provider, enhook uses installed framework hooks. The framework is detected in the following order:
+_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks. The framework is detected in the following order:
 
-* [`preact`](https://ghub.io/preact)
 * [`react`](https://ghub.io/react)
+* [`preact`](https://ghub.io/preact)
 * [`haunted`](https://ghub.io/haunted)
 * [`rax`](https://ghub.io/rax)
 * [`augmentor`](https://ghub.io/augmentor)
@@ -51,21 +51,7 @@ let enableHooks = enhook.bind({ render, h })
 let reactiveFn = enableHooks(init => /* ... */)
 ```
 
-## Supported hooks
-
-|                       | React | Preact | Rax | Haunted | Augmentor | TNG-hooks |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| `useState`             | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
-| `useEffect`            | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
-| `useContext`           | ✔️    | ✔️    | ✔️ | ✔️      | ✔️*      | ❌ |
-| `useReducer`           | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
-| `useCallback`          | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
-| `useMemo`              | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
-| `useRef`               | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
-| `useImperativeHandle`  | ✔️    | ✔️    | ✔️ | ❌      | ❌       | ❌ |
-| `useLayoutEffect`      | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ❌ |
- <!-- `useDebugValue` | -->
- <!-- `useProp` | -->
+Available hooks are provided by [any-hooks](https://ghub.io/any-hooks) package.
 
 
 ## Use-cases
@@ -89,6 +75,8 @@ let observeRoute = hooked((route, callback) => {
 observeRoute('/user/:id', ({ id }) => {})
 observeRoute('/org/:id', ({ id }) => {})
 ```
+
+See [any-hooks](https://ghub.io/any-hooks) for aliasing react, in case if react is not installed.
 
 ### 2. Functional custom elements
 
@@ -191,6 +179,7 @@ let observable = new Observable(hooked(observer => {
 
 ## See also
 
+* [any-hooks](https://github.com/dy/any-hooks) - resolve and get installed hooks.
 * [remorph](https://github.com/dy/remorph) - react/preact-based DOM morphing.
 
 ## Similar art

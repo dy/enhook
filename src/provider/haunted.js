@@ -1,4 +1,4 @@
-let enhook, lib, hooks, useState, useReducer, useEffect, useMemo, useCallback, useRef, useLayoutEffect
+let enhook, lib
 
 try { lib = require('haunted') } catch (e) { }
 if (lib) {
@@ -22,14 +22,6 @@ if (lib) {
       return lastResult
     }
   }
-
-  useState = lib.useState
-  useReducer = lib.useReducer
-  useEffect = lib.useEffect
-  useMemo = lib.useMemo
-  useCallback = lib.useCallback
-  useRef = lib.useRef
-  useLayoutEffect = lib.useLayoutEffect
 }
 
-export { enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef, useLayoutEffect }
+export { enhook }

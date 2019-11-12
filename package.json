@@ -1,15 +1,17 @@
 {
   "name": "enhook",
   "version": "1.3.3",
-  "description": "Enable react/preact hooks everywhere",
+  "description": "Enable react/preact/etc hooks for regular functions",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "any-hooks": "^1.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
     "atomico": "^0.12.6",
     "augmentor": "^0.2.6",
-    "browser-env": "^3.2.6",
+    "browser-env": "^3.3.0",
     "driver-dom": "^2.0.2",
     "driver-universal": "^2.0.1",
     "esm": "^3.2.25",
@@ -30,7 +32,7 @@
   ],
   "scripts": {
     "start": "parcel serve --no-hmr test.html",
-    "test": "node -r esm -r ./browser-env test"
+    "test": "node -r esm -r raf/polyfill -r browser-env/register test"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
   "keywords": [
     "react",
     "hooks",
+    "any-hooks",
     "use-state",
     "use-effect",
     "augmentor",

@@ -1,20 +1,21 @@
 // FIXME: must be assured that es modules version works synchronously
 // FIXME: move to a separate package, like any-react
 
-import * as preact from './preact'
-import * as react from './react'
-import * as rax from './rax'
-import * as haunted from './haunted'
-// import * as atomico from './atomico'
-import * as tng from './tng'
-import * as augmentor from './augmentor'
+let preact =  require('./preact')
+let react =  require('./react')
+let rax =  require('./rax')
+let haunted =  require('./haunted')
+// let atomico =  require('./atomico')
+let tng =  require('./tng-hooks')
+let augmentor =  require('./augmentor')
 
-const winner = preact.render ? preact :
+const winner =
   react.render ? react :
-  haunted.enhook ? haunted :
-  // atomico.render ? atomico :
+  preact.render ? preact :
   rax.render ? rax :
+  haunted.enhook ? haunted :
   augmentor.enhook ? augmentor :
+  // atomico.render ? atomico :
   tng.enhook ? tng : null
 
-export const { render, h, enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef, useImperativeHandle, useLayoutEffect } = winner
+module.exports = { render, h, enhook } = winner

@@ -83,7 +83,7 @@ t.skip('atomico', async t => {
 
 // FIXME: has a bit diverging API
 t.skip('tng', async t => {
-  let hooks = await import('./tng.js')
+  let hooks = await import('./tng-hooks.js')
   await testHooks(hooks, t)
   t.end()
 })
