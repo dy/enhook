@@ -12,9 +12,7 @@ if (lib) {
       state.run(() => {
         lastResult = fn.call(lastCtx, ...lastArgs)
       })
-      queueMicrotask(() => {
-        state.runEffects()
-      })
+      Promise.resolve().then(() => state.runEffects())
     }
 
     return function hooked (...args) {
