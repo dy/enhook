@@ -5,14 +5,14 @@ import * as preact from './preact'
 import * as react from './react'
 import * as rax from './rax'
 import * as haunted from './haunted'
-import * as atomico from './atomico'
+// import * as atomico from './atomico'
 import * as tng from './tng'
 import * as augmentor from './augmentor'
 
 const winner = preact.render ? preact :
   react.render ? react :
   haunted.enhook ? haunted :
-  atomico.render ? atomico :
+  // atomico.render ? atomico :
   rax.render ? rax :
   augmentor.enhook ? augmentor :
   tng.enhook ? tng : null

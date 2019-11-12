@@ -26,11 +26,11 @@ _Enhook_ turns any function into reactive function with enabled hooks. Unlike [a
 * [`preact`](https://ghub.io/preact)
 * [`react`](https://ghub.io/react)
 * [`haunted`](https://ghub.io/haunted)
-* [`atomico`](https://ghub.io/atomico)
 * [`rax`](https://ghub.io/rax)
 * [`augmentor`](https://ghub.io/augmentor)
 * [`tng-hooks`](https://ghub.io/tng-hooks) (manual call API)
-* [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (manual call API)
+<!-- * [`atomico`](https://ghub.io/atomico) -->
+<!-- * [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (manual call API) -->
 
 
 Target lib hooks can also be used directly as:
@@ -51,7 +51,7 @@ let enableHooks = enhook.bind({ render, h })
 let reactiveFn = enableHooks(init => /* ... */)
 ```
 
-## Supported hooks
+<!-- ## Supported hooks
 
  | React | Preact | Rax | Haunted | Atomico | Augmentor | TNG-hooks | fn-with-hooks
  ---|---|---|---|---|---|---|---
@@ -65,7 +65,7 @@ let reactiveFn = enableHooks(init => /* ... */)
  `useImperativeHandle` |
  `useLayoutEffect` |
  `useDebugValue` |
- `useProp` |
+ `useProp` | -->
 
 
 ## Use-cases
