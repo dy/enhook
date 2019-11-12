@@ -1,6 +1,5 @@
 import t from 'tape'
 import { frame, time, tick } from 'wait-please'
-// import setImmediate from 'immediate'
 
 // import { TNG, useState } from 'tng-hooks'
 // import hooked, { useState } from '.'
@@ -12,9 +11,6 @@ import { frame, time, tick } from 'wait-please'
 //   }, 1000)
 // })
 // f(0)
-
-
-
 
 async function testHooks (hooks, t) {
   let enhook = hooks.default
@@ -71,6 +67,18 @@ t('augmentor', async t => {
   let hooks = await import('./augmentor.js')
   await testHooks(hooks, t)
   t.end()
+})
+
+t('haunted', async t => {
+  let hooks = await import('./haunted.js')
+  await testHooks(hooks, t)
+  t.end()
+})
+
+t.skip('atomico', async t => {
+  // let hooks = await import('./atomico.js')
+  // await testHooks(hooks, t)
+  // t.end()
 })
 
 // FIXME: has a bit diverging API

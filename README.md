@@ -21,14 +21,16 @@ let countFrom = enableHooks(initCount => {
 countFrom(0)
 ```
 
-_Enhook_ turns any function into reactive function with enabled hooks.
-Hooks mechanism is detected from any available provider library in the following order:
+_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks provider, enhook uses installed framework hooks. The framework is detected in the following order:
 
 * [`preact`](https://ghub.io/preact)
 * [`react`](https://ghub.io/react)
+* [`haunted`](https://ghub.io/haunted)
 * [`rax`](https://ghub.io/rax)
 * [`augmentor`](https://ghub.io/augmentor)
 * [`tng-hooks`](https://ghub.io/tng-hooks) (manual call API)
+<!-- * [`atomico`](https://ghub.io/atomico) -->
+<!-- * [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (manual call API) -->
 
 
 Target lib hooks can also be used directly as:
@@ -49,7 +51,21 @@ let enableHooks = enhook.bind({ render, h })
 let reactiveFn = enableHooks(init => /* ... */)
 ```
 
-_Enhook_ by default exports `useState`, `useEffect`, `useReducer`, `useCallback`, `useMemo` and `useRef` hooks as aliases to library hooks.
+<!-- ## Supported hooks
+
+ | React | Preact | Rax | Haunted | Atomico | Augmentor | TNG-hooks | fn-with-hooks
+ ---|---|---|---|---|---|---|---
+ `useState` |
+ `useEffect` |
+ `useContext` |
+ `useReducer` |
+ `useCallback` |
+ `useMemo` |
+ `useRef` |
+ `useImperativeHandle` |
+ `useLayoutEffect` |
+ `useDebugValue` |
+ `useProp` | -->
 
 
 ## Use-cases
@@ -179,8 +195,9 @@ let observable = new Observable(hooked(observer => {
 
 ## Similar art
 
-* [augmentor](https://ghub.io/augmentor) - react-like hooks from @webreflection.
+* [augmentor](https://ghub.io/augmentor) - react-less fast hooks implementation.
 * [tng-hooks](https://ghub.io/tng-hooks) - another react-inspired hooks library, not compatible with react.
+* [fn-with-hooks](https://ghub.io/fn-with-hooks) - tng hooks inspired hooks library.
 
 <!-- * [any-observable](https://ghub.io/any-observable) -  -->
 

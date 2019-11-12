@@ -7,11 +7,14 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
+    "atomico": "^0.12.6",
     "augmentor": "^0.2.6",
     "browser-env": "^3.2.6",
     "driver-dom": "^2.0.2",
     "driver-universal": "^2.0.1",
     "esm": "^3.2.25",
+    "fn-with-hooks": "^0.1.1",
+    "haunted": "^4.6.2",
     "parcel": "^1.12.4",
     "preact": "^10.0.4",
     "rax": "^1.0.13",
@@ -26,7 +29,7 @@
     "last 1 Chrome versions"
   ],
   "scripts": {
-    "start": "parcel serve test.html",
+    "start": "parcel serve --no-hmr test.html",
     "test": "node -r esm -r ./browser-env test"
   },
   "repository": {

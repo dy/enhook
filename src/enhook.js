@@ -5,10 +5,7 @@ let doc = typeof document !== 'undefined' ? document : null
 export default function enhook(fn) {
   if (cache.has(fn)) return cache.get(fn)
 
-  let { h, render, enhook } = this
-
-  // direct call, as in augmentor/tng-hooks case`
-  if (enhook) return enhook(fn)
+  let { h, render } = this
 
   // FIXME: cache by last stacktrace entry
 
