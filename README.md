@@ -51,21 +51,21 @@ let enableHooks = enhook.bind({ render, h })
 let reactiveFn = enableHooks(init => /* ... */)
 ```
 
-<!-- ## Supported hooks
+## Supported hooks
 
- | React | Preact | Rax | Haunted | Atomico | Augmentor | TNG-hooks | fn-with-hooks
- ---|---|---|---|---|---|---|---
- `useState` |
- `useEffect` |
- `useContext` |
- `useReducer` |
- `useCallback` |
- `useMemo` |
- `useRef` |
- `useImperativeHandle` |
- `useLayoutEffect` |
- `useDebugValue` |
- `useProp` | -->
+ | React | Preact | Rax | Haunted | Augmentor | TNG-hooks
+ ---|---|---|---|---|---
+ `useState` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useEffect` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useContext` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useReducer` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useCallback` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useMemo` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useRef` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useImperativeHandle` | [x] | [x] | [x] | [x] | [x] | [x]
+ `useLayoutEffect` | [x] | [x] | [x] | [x] | [x] | [x]
+ <!-- `useDebugValue` | -->
+ <!-- `useProp` | -->
 
 
 ## Use-cases
