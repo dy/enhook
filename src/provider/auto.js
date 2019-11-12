@@ -17,4 +17,4 @@ const winner = preact.render ? preact :
   augmentor.enhook ? augmentor :
   tng.enhook ? tng : null
 
-export const { render, h, enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef } = winner
+export const { render, h, enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef, useImperativeHandle, useLayoutEffect } = winner

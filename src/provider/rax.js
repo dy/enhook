@@ -1,4 +1,4 @@
-let h, render, lib, driver, useState, useReducer, useEffect, useMemo, useCallback, useRef
+let h, render, lib, driver, useState, useReducer, useEffect, useMemo, useCallback, useRef, useImperativeHandle, useLayoutEffect
 
 try { lib = require('rax') } catch (e) { }
 try { driver = require('driver-dom') } catch (e) { }
@@ -18,6 +18,8 @@ if (lib) {
   useMemo = lib.useMemo
   useCallback = lib.useCallback
   useRef = lib.useRef
+  useImperativeHandle = lib.useImperativeHandle
+  useLayoutEffect = lib.useLayoutEffect
 }
 
-export { h, render, useState, useReducer, useEffect, useMemo, useCallback, useRef }
+export { h, render, useState, useReducer, useEffect, useMemo, useCallback, useRef, useImperativeHandle, useLayoutEffect }

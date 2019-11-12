@@ -1,4 +1,4 @@
-import { render, h, useState, useReducer, useEffect, useMemo, useCallback, useRef } from './src/provider/auto.js'
+import { render, h, useState, useReducer, useEffect, useMemo, useCallback, useRef, useImperativeHandle, useLayoutEffect } from './src/provider/auto.js'
 import hooker from './src/enhook.js'
 
 export default function enhook(...args) {
@@ -9,4 +9,4 @@ export default function enhook(...args) {
   return hooker.call({ render, h }, ...args)
 }
 
-export { useState, useReducer, useEffect, useMemo, useCallback, useRef }
+export { useState, useReducer, useEffect, useMemo, useCallback, useRef, useImperativeHandle, useLayoutEffect }

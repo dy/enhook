@@ -1,4 +1,4 @@
-let enhook, lib, useState, useReducer, useEffect, useMemo, useCallback, useRef
+let enhook, lib, useState, useReducer, useEffect, useMemo, useCallback, useRef, useLayoutEffect
 
 try { lib = require('augmentor') } catch (e) { }
 if (lib) {
@@ -9,6 +9,7 @@ if (lib) {
   useMemo = lib.useMemo
   useCallback = lib.useCallback
   useRef = lib.useRef
+  useLayoutEffect = lib.useLayoutEffect
 }
 
-export { enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef }
+export { enhook, useState, useReducer, useEffect, useMemo, useCallback, useRef, useLayoutEffect }
