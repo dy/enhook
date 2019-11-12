@@ -54,7 +54,7 @@ let reactiveFn = enableHooks(init => /* ... */)
 ## Supported hooks
 
 |                       | React | Preact | Rax | Haunted | Augmentor | TNG-hooks |
-|---|---|---|---|---|---|---|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
 | `useState`             | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
 | `useEffect`            | ✔️    | ✔️    | ✔️ | ✔️      | ✔️       | ✔️ |
 | `useContext`           | ✔️    | ✔️    | ✔️ | ✔️      | ✔️*      | ❌ |
