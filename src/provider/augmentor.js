@@ -2,7 +2,7 @@ let enhook, lib
 
 try { lib = require('augmentor') } catch (e) { }
 if (lib) {
-  enhook = lib.default
+  enhook = lib.augmentor
 }
 
 module.exports = { enhook }
