@@ -25,20 +25,20 @@ _Enhook_ turns any function into reactive function with enabled hooks. Unlike [a
 
 * [`react`](https://ghub.io/react)
 * [`preact`](https://ghub.io/preact)
-* [`haunted`](https://ghub.io/haunted)
 * [`rax`](https://ghub.io/rax)
+* [`haunted`](https://ghub.io/haunted)
 * [`augmentor`](https://ghub.io/augmentor)
+* [`atomico`](https://ghub.io/atomico)
 * [`tng-hooks`](https://ghub.io/tng-hooks) (manual call API)
-<!-- * [`atomico`](https://ghub.io/atomico) -->
 <!-- * [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (manual call API) -->
 
 
 Target lib hooks can also be used directly as:
 
 ```js
-import enableRaxHooks, { useState, useEffect } from 'enhook/rax'
+import enableHauntedHooks, { useState, useEffect } from 'enhook/haunted'
 
-let reactiveFn = enableRaxHooks(init => /* ...reactive code */)
+let reactiveFn = enableHauntedHooks(init => /* ...reactive code */)
 ```
 
 Custom hooks provider can be registered as:
@@ -102,7 +102,7 @@ customElements.define('my-component', class { constructor () { hooked(MyComponen
 
 ### 3. Methods with hooks
 
-Make class methods support hooks, even react components themselves.
+Make class methods support hooks, even react components themselves, like [react-universal-hooks](https://ghub.io/react-universal-hooks).
 
 ```js
 import hooked from 'enhook'
@@ -179,6 +179,7 @@ let observable = new Observable(hooked(observer => {
 
 ## See also
 
+* [unihooks](https://github.com/dy/unihooks) - unified all-framework essential hooks collection.
 * [any-hooks](https://github.com/dy/any-hooks) - resolve and get installed hooks.
 * [remorph](https://github.com/dy/remorph) - react/preact-based DOM morphing.
 
@@ -187,8 +188,6 @@ let observable = new Observable(hooked(observer => {
 * [augmentor](https://ghub.io/augmentor) - react-less fast hooks implementation.
 * [tng-hooks](https://ghub.io/tng-hooks) - another react-inspired hooks library, not compatible with react.
 * [fn-with-hooks](https://ghub.io/fn-with-hooks) - tng hooks inspired hooks library.
-
-<!-- * [any-observable](https://ghub.io/any-observable) -  -->
 
 ## License
 

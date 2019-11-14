@@ -4,11 +4,17 @@ try { lib = require('atomico') } catch (e) { }
 if (lib) {
 
   enhook = (fn) => {
-    let hooks = lib.createHookCollection(render)
+    let lastCtx, lastArgs
+    let hooks = lib.createHookCollection(update)
     return render
-    function render (props) {
-      hooks.load(fn, props)
-      hooks.updated()
+    function update () {
+      hooks.load(() => fn.call(lastCtx, ...lastArgs), lastArgs)
+      Promise.resolve().then(() => hooks.updated())
+    }
+    function render (...args) {
+      lastCtx = this
+      lastArgs = args
+      update()
     }
   }
 }

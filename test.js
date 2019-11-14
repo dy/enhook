@@ -77,7 +77,7 @@ t('haunted', async t => {
   t.end()
 })
 
-t.skip('atomico', async t => {
+t('atomico', async t => {
   let hooks = await import('./atomico.js')
   await testHooks(hooks, t)
   t.end()

@@ -9,7 +9,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
-    "atomico": "^0.12.6",
+    "atomico": "^0.13.3",
     "augmentor": "^0.2.6",
     "browser-env": "^3.3.0",
     "driver-dom": "^2.0.2",
