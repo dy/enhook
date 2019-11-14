@@ -1,18 +1,16 @@
-import { customElement } from 'atomico'
-
+// as per https://github.com/atomicojs/atomico/issues/15
+let enhook, lib
 try { lib = require('atomico') } catch (e) { }
 if (lib) {
-  function Component() {
-    return {nodeTyle: 'host'}
-  }
-  customElement('enhook-atomico', Component)
 
   enhook = (fn) => {
-    let el = document.createElement('enhook-atomico')
-    // customElements.upgrade(el)
-    document.documentElement.appendChild(el)
-    return fn
+    let hooks = lib.createHookCollection(render)
+    return render
+    function render (props) {
+      hooks.load(fn, props)
+      hooks.updated()
+    }
   }
 }
 
-export { enhook }
+module.exports = { enhook }

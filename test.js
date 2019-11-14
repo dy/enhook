@@ -12,6 +12,7 @@ import { frame, time, tick } from 'wait-please'
 // })
 // f(0)
 
+
 async function testHooks (hooks, t) {
   let enhook = hooks.default
   let { useEffect, useState, useMemo } = hooks
@@ -22,7 +23,8 @@ async function testHooks (hooks, t) {
     log.push(this)
     log.push(props)
 
-    let [count, setCount] = useState(0)
+    let res = useState(0)
+    let [count, setCount] = res
     log.push(count)
 
     useEffect(() => {
@@ -76,9 +78,9 @@ t('haunted', async t => {
 })
 
 t.skip('atomico', async t => {
-  // let hooks = await import('./atomico.js')
-  // await testHooks(hooks, t)
-  // t.end()
+  let hooks = await import('./atomico.js')
+  await testHooks(hooks, t)
+  t.end()
 })
 
 // FIXME: has a bit diverging API

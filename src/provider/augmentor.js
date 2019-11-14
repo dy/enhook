@@ -5,4 +5,4 @@ if (lib) {
   enhook = lib.default
 }
 
-export { enhook }
+module.exports = { enhook }

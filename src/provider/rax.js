@@ -12,4 +12,4 @@ if (lib) {
   render = (what, where) => lib.render(what, where, { driver })
 }
 
-export { h, render }
+module.exports = { h, render }

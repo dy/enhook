@@ -24,4 +24,4 @@ if (lib) {
   }
 }
 
-export { enhook }
+module.exports = { enhook }

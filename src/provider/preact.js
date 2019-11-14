@@ -6,4 +6,4 @@ if (lib) {
   render = lib.render
 }
 
-export { h, render }
+module.exports = { h, render }

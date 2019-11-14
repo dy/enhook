@@ -10,4 +10,4 @@ let renderer
 try { renderer = require('react-dom') } catch (e) { }
 if (renderer) render = renderer.render
 
-export { h, render }
+module.exports = { h, render }
