@@ -179,8 +179,8 @@ let observable = new Observable(hooked(observer => {
 
 ## See also
 
-* [unihooks](https://github.com/dy/unihooks) - unified all-framework essential hooks collection.
-* [any-hooks](https://github.com/dy/any-hooks) - resolve and get installed hooks.
+* [unihooks](https://github.com/unihooks/unihooks) - unified all-framework essential hooks collection.
+* [any-hooks](https://github.com/unihooks/any-hooks) - resolve and get installed hooks.
 * [remorph](https://github.com/dy/remorph) - react/preact-based DOM morphing.
 
 ## Similar art
