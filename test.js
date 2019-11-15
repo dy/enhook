@@ -46,21 +46,22 @@ async function testHooks (hooks, t) {
     t.end()
   })
 
-  t.skip('order of calls', async t => {
-    let log = []
-    let f = (i) => {
+  t.test('order of calls', async t => {
+    let log1 = [], log2 = []
+    let f = (i, log) => {
       log.push('call', i)
       useEffect(() => {log.push('effect', i)})
     }
     let f1 = enhook(f)
     let f2 = enhook(f)
 
-    f1(1)
-    f2(2)
+    f1(1, log1)
+    f2(2, log2)
 
-    t.deepEqual(log, ['call', 1, 'call', 2])
+    // generic tester, since effects order is not guaranteed across frameworks
     await frame(3)
-    t.deepEqual(log, ['call', 1, 'call', 2, 'effect', 1, 'effect', 2])
+    t.deepEqual(log1, ['call', 1, 'effect', 1])
+    t.deepEqual(log2, ['call', 2, 'effect', 2])
 
     t.end()
   })
