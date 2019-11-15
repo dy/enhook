@@ -5,7 +5,7 @@ if (lib) {
   const augment = lib.augmentor
   enhook = (fn) => {
     let ctx
-    let augmentedFn = augment((...args) => fn.call(ctx, ...args))
+    let augmentedFn = augment((...args) => fn.apply(ctx, args))
     return function (...args) {
       ctx = this
       return augmentedFn(...args)
