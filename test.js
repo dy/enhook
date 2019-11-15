@@ -46,7 +46,7 @@ async function testHooks (hooks, t) {
     t.end()
   })
 
-  t.test('order of calls', async t => {
+  t.skip('order of calls', async t => {
     let log = []
     let f = (i) => {
       log.push('call', i)
@@ -72,7 +72,7 @@ t('basics', async t => {
   t.end()
 })
 
-t.only('react', async t => {
+t('react', async t => {
   let hooks = await import('./react.js')
   await testHooks(hooks, t)
   t.end()
