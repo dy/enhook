@@ -3,7 +3,9 @@ const cache = new WeakMap
 let doc = typeof document !== 'undefined' ? document : null
 
 module.exports = function enhook(fn) {
-  if (cache.has(fn)) return cache.get(fn)
+  if (cache.has(fn)) {
+    return cache.get(fn).bind()
+  }
 
   let { h, render } = this
 
@@ -22,8 +24,6 @@ module.exports = function enhook(fn) {
     replaceChild: () => { }
   } : doc.createDocumentFragment()
 
-  cache.set(fn, hookedFn)
-
   let currentResult, currentCtx, currentArgs = []
 
   function Component() {
@@ -36,6 +36,8 @@ module.exports = function enhook(fn) {
     render(h(Component), holder)
     return currentResult
   }
+
+  cache.set(fn, hookedFn)
 
   return hookedFn
 }
