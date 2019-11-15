@@ -18,26 +18,24 @@ module.exports = function enhook(fn) {
     childNodes: [],
     ownerSVGElement: null,
     namespaceURI: "http://www.w3.org/1999/xhtml",
-    appendChild: () => {},
-    replaceChild: () => {}
-  } : document.createDocumentFragment()
+    appendChild: () => { },
+    replaceChild: () => { }
+  } : doc.createDocumentFragment()
 
-  cache.set(fn, enhookedFunction)
+  cache.set(fn, hookedFn)
 
-  let currentResult
+  let currentResult, currentCtx, currentArgs = []
 
-  function Component ({ args, ctx }) {
-    currentResult = fn.call(ctx, ...args)
+  function Component() {
+    currentResult = fn.call(currentCtx, ...currentArgs)
     return null
   }
-
-  function enhookedFunction(...args) {
-    let prevResult = currentResult
-    render(h(Component, { ctx: this, args }), holder)
-    let result = currentResult
-    currentResult = prevResult
-    return result
+  function hookedFn(...args) {
+    currentCtx = this
+    currentArgs = args
+    render(h(Component), holder)
+    return currentResult
   }
 
-  return enhookedFunction
+  return hookedFn
 }
