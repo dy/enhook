@@ -1,6 +1,6 @@
 {
   "name": "enhook",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Enable react/preact/etc hooks for regular functions",
   "main": "index.js",
   "dependencies": {
