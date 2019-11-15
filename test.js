@@ -1,17 +1,6 @@
 import t from 'tape'
 import { frame, time, tick } from 'wait-please'
 
-// import { TNG, useState } from 'tng-hooks'
-// import hooked, { useState } from '.'
-// let f = hooked((init) => {
-//   let [ count, setCount ] = useState(0)
-//   setTimeout(() => {
-//     console.log(count)
-//     setCount(++count)
-//   }, 1000)
-// })
-// f(0)
-
 
 async function testHooks (hooks, t) {
   let enhook = hooks.default

@@ -10,7 +10,7 @@
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
     "atomico": "^0.13.3",
-    "augmentor": "^1.1.5",
+    "augmentor": "^1.2.1",
     "browser-env": "^3.3.0",
     "driver-dom": "^2.0.2",
     "driver-universal": "^2.0.1",
