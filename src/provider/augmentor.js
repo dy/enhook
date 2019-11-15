@@ -5,7 +5,7 @@ if (lib) {
   if (lib.contextual) {
     enhook = lib.contextual
   }
-  // previous augmentor versions
+  // augmentor@1.1
   else {
     const augment = lib.augmentor
     enhook = (fn) => {
