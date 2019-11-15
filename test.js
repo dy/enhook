@@ -46,11 +46,13 @@ async function testHooks (hooks, t) {
     t.end()
   })
 
-  t.test('order of calls', async t => {
+  t.test('order & separate stack', async t => {
     let log1 = [], log2 = []
     let f = (i, log) => {
       log.push('call', i)
-      useEffect(() => {log.push('effect', i)})
+      useEffect(() => {
+        log.push('effect', i)
+      }, [])
     }
     let f1 = enhook(f)
     let f2 = enhook(f)

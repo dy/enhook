@@ -1,10 +1,6 @@
-const cache = new WeakMap
-
 let doc = typeof document !== 'undefined' ? document : null
 
 module.exports = function enhook(fn) {
-  if (cache.has(fn)) return cache.get(fn)
-
   let { h, render } = this
 
   // FIXME: cache by last stacktrace entry
@@ -22,8 +18,6 @@ module.exports = function enhook(fn) {
     replaceChild: () => { }
   } : doc.createDocumentFragment()
 
-  cache.set(fn, hookedFn)
-
   let currentResult, currentCtx, currentArgs = []
 
   function Component() {
@@ -33,8 +27,11 @@ module.exports = function enhook(fn) {
   function hookedFn(...args) {
     currentCtx = this
     currentArgs = args
+    let prevResult = currentResult
     render(h(Component), holder)
-    return currentResult
+    let result = currentResult
+    currentResult = prevResult
+    return result
   }
 
   return hookedFn
