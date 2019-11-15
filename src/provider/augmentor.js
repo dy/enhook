@@ -2,11 +2,11 @@ let enhook, lib
 
 try { lib = require('augmentor') } catch (e) { }
 if (lib) {
-  // if (lib.contextual) {
-  //   const augmentWithCtx = lib.contextual
-  // }
+  if (lib.contextual) {
+    enhook = lib.contextual
+  }
   // previous augmentor versions
-  // else {
+  else {
     const augment = lib.augmentor
     enhook = (fn) => {
       let ctx
@@ -16,7 +16,7 @@ if (lib) {
         return augmentedFn(...args)
       }
     }
-  // }
+  }
 }
 
 module.exports = { enhook }
