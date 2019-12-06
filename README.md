@@ -1,4 +1,4 @@
-# enhook [![Build Status](https://travis-ci.org/dy/enhook.svg?branch=master)](https://travis-ci.org/dy/enhook) [![unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](http://github.com/badges/stability-badges)
+# enhook [![Build Status](https://travis-ci.org/unihooks/enhook.svg?branch=master)](https://travis-ci.org/unihooks/enhook) [![unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](http://github.com/badges/stability-badges)
 
 Enable react/preact/∀ hooks for regular functions.
 
@@ -28,6 +28,8 @@ _Enhook_ turns any function into reactive function with enabled hooks. Unlike [a
 * [`rax`](https://ghub.io/rax)
 * [`haunted`](https://ghub.io/haunted)
 * [`augmentor`](https://ghub.io/augmentor)
+* [`neverland`](https://ghub.io/neverland)
+* [`spect`](https://ghub.io/spect)
 * [`atomico`](https://ghub.io/atomico)
 * [`tng-hooks`](https://ghub.io/tng-hooks) (manual call API)
 <!-- * [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (manual call API) -->
