@@ -57,7 +57,6 @@ async function testHooks (t) {
 }
 
 t('basics', async t => {
-  enhook.use(null)
   await testHooks(t)
   t.end()
 })
@@ -87,19 +86,19 @@ t('augmentor', async t => {
 })
 
 t.skip('dom-augmentor', async t => {
-  enhook.use('dom-augmentor')
+  setHooks('dom-augmentor')
   await testHooks(t)
   t.end()
 })
 
 t.skip('neverland', async t => {
-  enhook.use('neverland')
+  setHooks('neverland')
   await testHooks(t)
   t.end()
 })
 
 t.skip('fuco', async t => {
-  enhook.use('fuco')
+  setHooks('fuco')
   await testHooks(t)
   t.end()
 })
@@ -118,15 +117,14 @@ t('atomico', async t => {
 
 // FIXME: has a bit diverging API
 t.skip('tng', async t => {
-  enhook.use('tng-hooks')
-  setHooks(require('tng-hooks'), 'tng-hooks')
+  setHooks('tng-hooks')
   await testHooks(t)
   t.end()
 })
 
 // FIXME: has a bit diverging API
 t.skip('fn-with-hooks', async t => {
-  enhook.use('fn-with-hooks')
+  setHooks('fn-with-hooks')
   await testHooks(t)
   t.end()
 })
@@ -137,7 +135,6 @@ t.skip('Example 1', t => {
 
 
 t('survival', async t => {
-  enhook.use(null)
   setHooks('preact')
 
   let count = 0

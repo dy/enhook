@@ -3,12 +3,12 @@ import hooker from './src/enhook.js'
 import { current } from 'any-hooks'
 
 let enhook
-export { enhook as default }
+export { enhook as default, useFramework }
 
-use(null)
+useFramework(null)
 
 // replace exports to new config
-function use(lib) {
+function useFramework(lib) {
   // automatic detection based on any-hooks
   if (!lib || lib === 'auto') {
     let currentHooks, currentEnhook
@@ -39,8 +39,6 @@ function use(lib) {
   }
 
   else throw Error('Unknown argument')
-
-  enhook.use = use
 
   return enhook
 }

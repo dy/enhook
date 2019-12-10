@@ -23,25 +23,38 @@ countFrom(0)
 
 _Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks. The framework is detected from the list:
 
-* [`react`](https://ghub.io/react)
-* [`preact`](https://ghub.io/preact)
-* [`rax`](https://ghub.io/rax)
-* [`haunted`](https://ghub.io/haunted)
-* [`augmentor`](https://ghub.io/augmentor)
-* [`dom-augmentor`](https://ghub.io/dom-augmentor)
-* [`neverland`](https://ghub.io/neverland)
-* [`atomico`](https://ghub.io/atomico)
-* [`fuco`](https://ghub.io/fuco)
-* [`tng-hooks`](https://ghub.io/tng-hooks) (non-reactive)
-* [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (non-reactive)
+* [x] [`react`](https://ghub.io/react)
+* [x] [`preact`](https://ghub.io/preact)
+* [x] [`rax`](https://ghub.io/rax)
+* [x] [`haunted`](https://ghub.io/haunted)
+* [x] [`augmentor`](https://ghub.io/augmentor)
+* [ ] [`dom-augmentor`](https://ghub.io/dom-augmentor)
+* [ ] [`neverland`](https://ghub.io/neverland)
+* [x] [`atomico`](https://ghub.io/atomico)
+* [ ] [`fuco`](https://ghub.io/fuco)
+* [x] [`tng-hooks`](https://ghub.io/tng-hooks) (non-reactive)
+* [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (non-reactive)
 
 
-Custom hooks provider can be set as:
+Custom hooks provider can be switched via [any-hooks](https://ghub.io/any-hooks) as:
 
 ```js
 import enhook from 'enhook'
+import setHooks, { useState, useEffect } from 'any-hooks'
+setHooks('preact')
 
-enhook.use('preact')
+// now enhook uses preact-hooks by default
+let reactiveFn = enhook(() => {
+  let [count, setCount] = useState(0)
+})
+```
+
+<!--
+```js
+import enhook from 'enhook'
+
+// known hooks
+enhook.bind('preact')
 
 // custom enhook function
 enhook.use(require('augmentor').contextual)
@@ -52,6 +65,7 @@ enhook.use({ render, h })
 // auto detection
 enhook.use(null)
 ```
+-->
 
 
 ## Use-cases
