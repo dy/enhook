@@ -21,39 +21,37 @@ let countFrom = enableHooks(initCount => {
 countFrom(0)
 ```
 
-_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks. The framework is detected in the following order:
+_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks. The framework is detected from the list:
 
 * [`react`](https://ghub.io/react)
 * [`preact`](https://ghub.io/preact)
 * [`rax`](https://ghub.io/rax)
 * [`haunted`](https://ghub.io/haunted)
 * [`augmentor`](https://ghub.io/augmentor)
+* [`dom-augmentor`](https://ghub.io/dom-augmentor)
 * [`neverland`](https://ghub.io/neverland)
-* [`spect`](https://ghub.io/spect)
 * [`atomico`](https://ghub.io/atomico)
-* [`tng-hooks`](https://ghub.io/tng-hooks) (manual call API)
-<!-- * [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (manual call API) -->
+* [`fuco`](https://ghub.io/fuco)
+* [`tng-hooks`](https://ghub.io/tng-hooks) (non-reactive)
+* [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (non-reactive)
 
 
-Target lib hooks can also be used directly as:
-
-```js
-import enableHauntedHooks, { useState, useEffect } from 'enhook/haunted'
-
-let reactiveFn = enableHauntedHooks(init => /* ...reactive code */)
-```
-
-Custom hooks provider can be registered as:
+Custom hooks provider can be set as:
 
 ```js
-import { render, h, useState, useEffect } from 'red-lights'
 import enhook from 'enhook'
 
-let enableHooks = enhook.bind({ render, h })
-let reactiveFn = enableHooks(init => /* ... */)
-```
+enhook.use('preact')
 
-Available hooks are provided by [any-hooks](https://ghub.io/any-hooks) package.
+// custom enhook function
+enhook.use(require('augmentor').contextual)
+
+// custom vdom with hooks
+enhook.use({ render, h })
+
+// auto detection
+enhook.use(null)
+```
 
 
 ## Use-cases

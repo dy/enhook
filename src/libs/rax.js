@@ -1,4 +1,5 @@
-let h, render, lib, driver
+let hooker = require('../enhook')
+let h, render, lib, driver, enhook
 
 try { lib = require('rax') } catch (e) { }
 try { driver = require('driver-dom') } catch (e) { }
@@ -10,6 +11,7 @@ if (!driver) { try { driver = require('driver-webgl') } catch (e) { } }
 if (lib) {
   h = lib.createElement
   render = (what, where) => lib.render(what, where, { driver })
+  enhook = (fn) => hooker.call({ h, render }, fn)
 }
 
-module.exports = { h, render }
+module.exports = enhook

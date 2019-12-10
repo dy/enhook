@@ -5,4 +5,4 @@ if (lib) {
   enhook = lib.TNG
 }
 
-module.exports = { enhook }
+module.exports = enhook

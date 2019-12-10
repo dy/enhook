@@ -1,13 +1,46 @@
-import * as lib from './src/provider/auto.js'
+import * as libs from './src/libs.js'
 import hooker from './src/enhook.js'
+import { current } from 'any-hooks'
 
-export default lib.enhook || function enhook(...args) {
-  let render = this && this.render || lib.render
-  let h = this && this.h || lib.h
+let enhook
+export { enhook as default }
 
-  if (!render || !h) throw Error('Hooks provider is not found. `{ render, h }` must be provided as `enhook.bind({ render, h })`')
+use(null)
 
-  return hooker.call({ render, h }, ...args)
+// replace exports to new config
+function use(lib) {
+  // automatic detection based on any-hooks
+  if (!lib || lib === 'auto') {
+    let currentHooks, currentEnhook
+    enhook = (fn) => {
+      if (currentHooks !== current) {
+        currentEnhook = libs[current]
+        if (!currentEnhook) throw Error('Couldn\'t find enhook provider for selected hooks `' + current + '`')
+        currentHooks = current
+      }
+      return currentEnhook(fn)
+    }
+  }
+
+  // forced framework
+  else if (typeof lib === 'string') {
+    if (!libs[lib]) throw Error('Unknown provider: `' + lib + '`')
+    enhook = libs[lib]
+  }
+
+  // direct enhook function
+  else if (typeof lib === 'function') {
+    enhook = lib
+  }
+
+  // lib/render fallback
+  else if (lib && lib.render && lib.h) {
+    enhook = () => hooker.apply(lib, arguments)
+  }
+
+  else throw Error('Unknown argument')
+
+  enhook.use = use
+
+  return enhook
 }
-
-export * from 'any-hooks'

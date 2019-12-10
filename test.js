@@ -1,11 +1,9 @@
 import t from 'tape'
 import { frame, time, tick } from 'wait-please'
+import enhook from '.'
+import setHooks, { useEffect, useState, useMemo, useLayoutEffect, current } from 'any-hooks'
 
-
-async function testHooks (hooks, t) {
-  let enhook = hooks.default
-  let { useEffect, useState, useMemo, useLayoutEffect } = hooks
-
+async function testHooks (t) {
   t.test('context & args', async t => {
     let log = []
 
@@ -59,51 +57,77 @@ async function testHooks (hooks, t) {
 }
 
 t('basics', async t => {
-  let hooks = await import('./index.js')
-  await testHooks(hooks, t)
-  t.end()
-})
-
-t('react', async t => {
-  let hooks = await import('./react.js')
-  await testHooks(hooks, t)
+  enhook.use(null)
+  await testHooks(t)
   t.end()
 })
 
 t('preact', async t => {
-  let hooks = await import('./preact.js')
-  await testHooks(hooks, t)
+  setHooks('preact')
+  await testHooks(t)
+  t.end()
+})
+
+t('react', async t => {
+  setHooks('react')
+  await testHooks(t)
   t.end()
 })
 
 t('rax', async t => {
-  let hooks = await import('./rax.js')
-  await testHooks(hooks, t)
+  setHooks('rax')
+  await testHooks(t)
   t.end()
 })
 
 t('augmentor', async t => {
-  let hooks = await import('./augmentor.js')
-  await testHooks(hooks, t)
+  setHooks('augmentor')
+  await testHooks(t)
+  t.end()
+})
+
+t.skip('dom-augmentor', async t => {
+  enhook.use('dom-augmentor')
+  await testHooks(t)
+  t.end()
+})
+
+t.skip('neverland', async t => {
+  enhook.use('neverland')
+  await testHooks(t)
+  t.end()
+})
+
+t.skip('fuco', async t => {
+  enhook.use('fuco')
+  await testHooks(t)
   t.end()
 })
 
 t('haunted', async t => {
-  let hooks = await import('./haunted.js')
-  await testHooks(hooks, t)
+  setHooks('haunted')
+  await testHooks(t)
   t.end()
 })
 
 t('atomico', async t => {
-  let hooks = await import('./atomico.js')
-  await testHooks(hooks, t)
+  setHooks('atomico')
+  await testHooks(t)
   t.end()
 })
 
 // FIXME: has a bit diverging API
 t.skip('tng', async t => {
-  let hooks = await import('./tng-hooks.js')
-  await testHooks(hooks, t)
+  enhook.use('tng-hooks')
+  setHooks(require('tng-hooks'), 'tng-hooks')
+  await testHooks(t)
+  t.end()
+})
+
+// FIXME: has a bit diverging API
+t.skip('fn-with-hooks', async t => {
+  enhook.use('fn-with-hooks')
+  await testHooks(t)
   t.end()
 })
 
@@ -111,23 +135,13 @@ t.skip('Example 1', t => {
   // TODO
 })
 
-function idle(n=1) {
-  return new Promise(ok => {
-    let count = 0
-    f()
-    function f() {
-      if (count === n) return ok()
-      count++
-      setImmediate(f)
-    }
-  })
-}
 
 t('survival', async t => {
-  let { default: hooked, useEffect } = await import('./preact.js')
+  enhook.use(null)
+  setHooks('preact')
 
   let count = 0
-  let f = hooked(
+  let f = enhook(
     () => useEffect(() => {count++})
   )
   let N = 1e6

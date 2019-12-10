@@ -1,5 +1,5 @@
-let h, render
-
+let hooker = require('../enhook')
+let h, render, enhook
 let lib
 try { lib = require('react') } catch (e) { }
 if (lib) {
@@ -10,4 +10,9 @@ let renderer
 try { renderer = require('react-dom') } catch (e) { }
 if (renderer) render = renderer.render
 
-module.exports = { h, render }
+if (lib) enhook = function (fn) {
+  return hooker.call({ h, render }, fn)
+}
+
+module.exports = enhook
+

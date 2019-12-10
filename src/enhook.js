@@ -1,6 +1,6 @@
 let doc = typeof document !== 'undefined' ? document : null
 
-module.exports = function enhook(fn) {
+module.exports = function enhookRaw(fn) {
   let { h, render } = this
 
   // FIXME: cache by last stacktrace entry
@@ -14,8 +14,8 @@ module.exports = function enhook(fn) {
     childNodes: [],
     ownerSVGElement: null,
     namespaceURI: "http://www.w3.org/1999/xhtml",
-    appendChild: () => { },
-    replaceChild: () => { }
+    appendChild() { },
+    replaceChild() { }
   } : doc.createDocumentFragment()
 
   let currentResult, currentCtx, currentArgs = []
@@ -24,6 +24,7 @@ module.exports = function enhook(fn) {
     currentResult = fn.call(currentCtx, ...currentArgs)
     return null
   }
+
   function hookedFn(...args) {
     currentCtx = this
     currentArgs = args

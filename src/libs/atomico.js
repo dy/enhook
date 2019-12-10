@@ -2,7 +2,6 @@
 let enhook, lib
 try { lib = require('atomico') } catch (e) { }
 if (lib) {
-
   enhook = (fn) => {
     let lastCtx, lastArgs
     let hooks = lib.createHookCollection(update)
@@ -19,4 +18,4 @@ if (lib) {
   }
 }
 
-module.exports = { enhook }
+module.exports = enhook
