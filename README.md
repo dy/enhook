@@ -5,7 +5,8 @@ Enable react/preact/∀ hooks for regular functions.
 [![NPM](https://nodei.co/npm/enhook.png?mini=true)](https://nodei.co/npm/enhook/)
 
 ```js
-import enableHooks, { useState, useEffect } from 'enhook'
+import enableHooks from 'enhook'
+import { useState, useEffect } from 'any-hooks'
 
 let countFrom = enableHooks(initCount => {
   let [count, setCount] = useState(initCount)
@@ -21,7 +22,9 @@ let countFrom = enableHooks(initCount => {
 countFrom(0)
 ```
 
-_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks. The framework is detected from the list:
+_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks via [any-hooks](https://ghub.io/any-hooks).
+
+The framework is detected from the list:
 
 * [x] [`react`](https://ghub.io/react)
 * [x] [`preact`](https://ghub.io/preact)
@@ -36,7 +39,7 @@ _Enhook_ turns any function into reactive function with enabled hooks. Unlike [a
 * [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (non-reactive)
 
 
-Custom hooks provider can be switched via [any-hooks](https://ghub.io/any-hooks) as:
+Custom hooks provider can be switched as:
 
 ```js
 import enhook from 'enhook'
@@ -67,7 +70,7 @@ enhook.use(null)
 ```
 -->
 
-
+<!--
 ## Use-cases
 
 ### 1. React/preact hooks anywhere
@@ -134,7 +137,7 @@ MyComponent.prototype.render = hooked(MyComponent.prototype.render)
 ```
 
 ### 4. [wait for it]
-<!--
+
 ### 4. Functional components reactive framework
 
 Hyperscript with functional components would look like:
@@ -171,7 +174,7 @@ function CounterApp () {
 }
 
 render(html`<${CounterApp}/>`, document.getElementById('app'))
-``` -->
+```
 
 
 ### 5. Stream / observable / async iterators etc.
@@ -190,18 +193,12 @@ let observable = new Observable(hooked(observer => {
   return () => {} // destruct
 })
 ```
+-->
 
 ## See also
 
 * [unihooks](https://github.com/unihooks/unihooks) - unified all-framework essential hooks collection.
-* [any-hooks](https://github.com/unihooks/any-hooks) - resolve and get installed hooks.
-* [remorph](https://github.com/dy/remorph) - react/preact-based DOM morphing.
 
-## Similar art
-
-* [augmentor](https://ghub.io/augmentor) - react-less fast hooks implementation.
-* [tng-hooks](https://ghub.io/tng-hooks) - another react-inspired hooks library, not compatible with react.
-* [fn-with-hooks](https://ghub.io/fn-with-hooks) - tng hooks inspired hooks library.
 
 ## License
 
