@@ -1,6 +1,6 @@
 let doc = typeof document !== 'undefined' ? document : null
 
-export let MAX_RERENDER = 25
+let MAX_RERENDER = 25
 
 module.exports = function enhookRaw(fn, options = {}) {
   let { h, render } = this
