@@ -1,8 +1,11 @@
 let doc = typeof document !== 'undefined' ? document : null
 
-module.exports = function enhookRaw(fn, options={}) {
+export let MAX_RERENDER = 25
+
+module.exports = function enhookRaw(fn, options = {}) {
   let { h, render } = this
   let { passive } = options
+  let count = 0
 
   // FIXME: cache by last stacktrace entry
 
@@ -19,14 +22,20 @@ module.exports = function enhookRaw(fn, options={}) {
     replaceChild() { }
   } : doc.createDocumentFragment()
 
-  let currentResult, currentCtx, currentArgs = [], blocked
+  let currentResult, currentCtx, currentArgs = [], blocked, rendered
 
   function Component() {
-    if (passive && blocked === fn) {
-      return null
-    }
+    if (++count >= MAX_RERENDER) throw Error('More than ' + MAX_RERENDER + ' rerenders, likely there\'s infinite recursion')
+    if (passive && blocked === fn) return null
     currentResult = fn.call(currentCtx, ...currentArgs)
     if (passive) blocked = fn
+    if (!rendered) {
+      rendered = true
+      queueMicrotask(() => {
+        rendered = false
+        count = 0
+      })
+    }
     return null
   }
 
