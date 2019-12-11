@@ -44,11 +44,11 @@ Custom hooks provider can be set via _any-hooks_:
 ```js
 import enhook from 'enhook'
 import setHooks, { useState, useEffect } from 'any-hooks'
+
 setHooks('preact')
 // or setHooks('preact', require('preact/hooks'))
 
-
-// now enhook uses preact-hooks by default
+// now enhook uses preact hooks
 let reactiveFn = enhook(() => {
   let [count, setCount] = useState(0)
 })
