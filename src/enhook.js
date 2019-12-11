@@ -1,4 +1,4 @@
-import queueMicrotask from 'queue-microtask'
+let queueMicrotask = require('queue-microtask')
 
 let doc = typeof document !== 'undefined' ? document : null
 
