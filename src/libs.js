@@ -6,4 +6,14 @@ import atomico from './libs/atomico'
 import tng from './libs/tng-hooks'
 import augmentor from './libs/augmentor'
 
-export { preact, react, rax, haunted, atomico, tng, augmentor}
+export default {
+  preact,
+  'preact/hooks': preact,
+  react,
+  rax,
+  haunted,
+  atomico,
+  tng,
+  'tng-hooks': tng,
+  augmentor
+}

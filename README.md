@@ -35,8 +35,8 @@ The framework is detected from the list:
 * [ ] [`neverland`](https://ghub.io/neverland)
 * [x] [`atomico`](https://ghub.io/atomico)
 * [ ] [`fuco`](https://ghub.io/fuco)
-* [x] [`tng-hooks`](https://ghub.io/tng-hooks) (non-reactive)
-* [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (non-reactive)
+* [x] [`tng-hooks`](https://ghub.io/tng-hooks) (passive)
+* [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (passive)
 
 
 Custom hooks provider can be switched as:
@@ -50,6 +50,24 @@ setHooks('preact')
 let reactiveFn = enhook(() => {
   let [count, setCount] = useState(0)
 })
+```
+
+## API
+
+### `fn = enhook(fn, { passive=false }?)`
+
+Create function wrapper, allowing hooks in function body. `passive` option may define if function must be reactive.
+
+```js
+import enhook from 'enhook'
+import { useState } from 'any-hooks'
+
+let passiveFn = enhook(() => {
+  let [count, setCount] = useState(0)
+}, { passive: true })
+
+// this does not call self-recursion
+passiveFn()
 ```
 
 <!--

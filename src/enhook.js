@@ -1,7 +1,8 @@
 let doc = typeof document !== 'undefined' ? document : null
 
-module.exports = function enhookRaw(fn) {
+module.exports = function enhookRaw(fn, options={}) {
   let { h, render } = this
+  let { passive } = options
 
   // FIXME: cache by last stacktrace entry
 
@@ -18,10 +19,14 @@ module.exports = function enhookRaw(fn) {
     replaceChild() { }
   } : doc.createDocumentFragment()
 
-  let currentResult, currentCtx, currentArgs = []
+  let currentResult, currentCtx, currentArgs = [], blocked
 
   function Component() {
+    if (passive && blocked === fn) {
+      return null
+    }
     currentResult = fn.call(currentCtx, ...currentArgs)
+    if (passive) blocked = fn
     return null
   }
 
@@ -29,6 +34,7 @@ module.exports = function enhookRaw(fn) {
     currentCtx = this
     currentArgs = args
     let prevResult = currentResult
+    if (passive) blocked = null
     render(h(Component), holder)
     let result = currentResult
     currentResult = prevResult

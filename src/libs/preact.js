@@ -5,7 +5,7 @@ try { lib = require('preact') } catch (e) { }
 if (lib) {
   h = lib.h
   render = lib.render
-  enhook = (fn) => hooker.call({ h, render }, fn)
+  enhook = hooker.bind({ h, render })
 }
 
 module.exports = enhook

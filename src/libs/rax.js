@@ -11,7 +11,7 @@ if (!driver) { try { driver = require('driver-webgl') } catch (e) { } }
 if (lib) {
   h = lib.createElement
   render = (what, where) => lib.render(what, where, { driver })
-  enhook = (fn) => hooker.call({ h, render }, fn)
+  enhook = hooker.bind({ h, render })
 }
 
 module.exports = enhook

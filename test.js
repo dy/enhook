@@ -3,8 +3,13 @@ import { frame, time, tick } from 'wait-please'
 import enhook from '.'
 import setHooks, { useEffect, useState, useMemo, useLayoutEffect, current } from 'any-hooks'
 
-async function testHooks (t) {
-  t.test('context & args', async t => {
+import * as ReactDOM from 'react-dom'
+// console.log(ReactDOM)
+
+async function testHooks (name='') {
+  setHooks(name)
+
+  t(name + ': context & args', async t => {
     let log = []
 
     function f(props) {
@@ -26,14 +31,14 @@ async function testHooks (t) {
     t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, ['call', 0]])
 
     // not sure why preact prefers 3 frames
-    await frame(3)
+    await frame(4)
 
     t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, ['call', 0], { foo: 1 }, { bar: 2 }, ['call', 1]])
 
     t.end()
   })
 
-  t.test('order & separate stack', async t => {
+  t(name + ': order & separate stack', async t => {
     let log1 = [], log2 = []
     let f = (i, log) => {
       log.push('call', i)
@@ -54,87 +59,44 @@ async function testHooks (t) {
 
     t.end()
   })
+
+  t.skip(name + ': passive fn', async t => {
+    t.plan(2)
+    let log = []
+
+    let fn = enhook(() => {
+      let [count, setCount] = useState(0)
+      log.push(count)
+      if (log.length < 10) setCount(1)
+    }, { passive: true })
+    fn()
+    t.deepEqual(log, [0], 'first')
+
+    await tick()
+    fn()
+    await tick()
+
+    t.deepEqual(log, [0, 1], 'second')
+
+    t.end()
+  })
 }
 
-t('basics', async t => {
-  await testHooks(t)
-  t.end()
-})
-
-t('preact', async t => {
-  setHooks('preact')
-  await testHooks(t)
-  t.end()
-})
-
-t('react', async t => {
-  setHooks('react')
-  await testHooks(t)
-  t.end()
-})
-
-t('rax', async t => {
-  setHooks('rax')
-  await testHooks(t)
-  t.end()
-})
-
-t('augmentor', async t => {
-  setHooks('augmentor')
-  await testHooks(t)
-  t.end()
-})
-
-t.skip('dom-augmentor', async t => {
-  setHooks('dom-augmentor')
-  await testHooks(t)
-  t.end()
-})
-
-t.skip('neverland', async t => {
-  setHooks('neverland')
-  await testHooks(t)
-  t.end()
-})
-
-t.skip('fuco', async t => {
-  setHooks('fuco')
-  await testHooks(t)
-  t.end()
-})
-
-t('haunted', async t => {
-  setHooks('haunted')
-  await testHooks(t)
-  t.end()
-})
-
-t('atomico', async t => {
-  setHooks('atomico')
-  await testHooks(t)
-  t.end()
-})
-
-// FIXME: has a bit diverging API
-t.skip('tng', async t => {
-  setHooks('tng-hooks')
-  await testHooks(t)
-  t.end()
-})
-
-// FIXME: has a bit diverging API
-t.skip('fn-with-hooks', async t => {
-  setHooks('fn-with-hooks')
-  await testHooks(t)
-  t.end()
-})
-
-t.skip('Example 1', t => {
-  // TODO
-})
+testHooks()
+testHooks('preact')
+testHooks('react')
+testHooks('rax')
+testHooks('augmentor')
+testHooks('haunted')
+testHooks('atomico')
+// testHooks('tng-hooks')
+// testHooks('dom-augmentor')
+// testHooks('neverland')
+// testHooks('fuco')
+// testHooks('fn-with-hooks')
 
 
-t('survival', async t => {
+t.skip('survival', async t => {
   setHooks('preact')
 
   let count = 0

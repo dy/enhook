@@ -8,7 +8,9 @@ if (lib) {
   // augmentor@1.1
   else {
     const augment = lib.augmentor
-    enhook = (fn) => {
+    enhook = (fn, options={}) => {
+      if (options.passive) throw Error('Passive mode is not supported for augmentor')
+
       let ctx
       const augmentedFn = augment((...args) => fn.apply(ctx, args))
       return function (...args) {

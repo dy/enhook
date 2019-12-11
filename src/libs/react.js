@@ -6,12 +6,12 @@ if (lib) {
   h = lib.createElement
 }
 
-let renderer
-try { renderer = require('react-dom') } catch (e) { }
-if (renderer) render = renderer.render
+try { render = require('react-dom').render } catch (e) { }
 
-if (lib) enhook = function (fn) {
-  return hooker.call({ h, render }, fn)
+if (lib) enhook = (fn, options) => {
+  // hooker.bind({ h, render })
+  if (options && options.passive) throw Error('Passive mode is not yet supported for `react`')
+  return hooker.call({h, render}, fn, options)
 }
 
 module.exports = enhook

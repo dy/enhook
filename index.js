@@ -1,4 +1,4 @@
-import * as libs from './src/libs.js'
+import libs from './src/libs.js'
 import hooker from './src/enhook.js'
 import { current } from 'any-hooks'
 
@@ -12,13 +12,13 @@ function useFramework(lib) {
   // automatic detection based on any-hooks
   if (!lib || lib === 'auto') {
     let currentHooks, currentEnhook
-    enhook = (fn) => {
+    enhook = (fn, options) => {
       if (currentHooks !== current) {
         currentEnhook = libs[current]
         if (!currentEnhook) throw Error('Couldn\'t find enhook provider for selected hooks `' + current + '`')
         currentHooks = current
       }
-      return currentEnhook(fn)
+      return currentEnhook(fn, options)
     }
   }
 
@@ -35,7 +35,8 @@ function useFramework(lib) {
 
   // lib/render fallback
   else if (lib && lib.render && lib.h) {
-    enhook = () => hooker.apply(lib, arguments)
+    let { render, h } = lib
+    enhook = hooker.bind({ render, h })
   }
 
   else throw Error('Unknown argument')
