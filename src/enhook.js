@@ -1,3 +1,5 @@
+import queueMicrotask from 'queue-microtask'
+
 let doc = typeof document !== 'undefined' ? document : null
 
 let MAX_RERENDER = 25
