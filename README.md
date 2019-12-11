@@ -39,12 +39,14 @@ The framework is detected from the list:
 * [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (passive)
 
 
-Custom hooks provider can be switched as:
+Custom hooks provider can be set via _any-hooks_:
 
 ```js
 import enhook from 'enhook'
 import setHooks, { useState, useEffect } from 'any-hooks'
 setHooks('preact')
+// or setHooks('preact', require('preact/hooks'))
+
 
 // now enhook uses preact-hooks by default
 let reactiveFn = enhook(() => {
