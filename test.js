@@ -155,7 +155,7 @@ t('survival', async t => {
       count++
     })
   })
-  let N = 1e3
+  let N = 1e6
   for (let i = N; i--;) { f() }
 
   await frame(3)

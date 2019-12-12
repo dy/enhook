@@ -8,7 +8,7 @@ module.exports = function limit (fn) {
 
     if (!dirty) {
       dirty = true
-      queueMicrotask(() => {
+      Promise.resolve.then(() => {
         dirty = false
         wrapped.count = 0
       })

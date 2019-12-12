@@ -4,8 +4,7 @@
   "description": "Enable react/preact/etc hooks for regular functions",
   "main": "index.js",
   "dependencies": {
-    "any-hooks": "^2.3.0",
-    "queue-microtask": "^1.1.2"
+    "any-hooks": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
