@@ -3,8 +3,6 @@ import { frame, time, tick } from 'wait-please'
 import enhook from '.'
 import setHooks, { useEffect, useState, useMemo, useLayoutEffect, current } from 'any-hooks'
 
-import * as ReactDOM from 'react-dom'
-// console.log(ReactDOM)
 
 async function testHooks (name='') {
   setHooks(name)
@@ -60,7 +58,7 @@ async function testHooks (name='') {
     t.end()
   })
 
-  t.skip(name + ': passive fn', async t => {
+  t(name + ': passive fn', async t => {
     t.plan(2)
     let log = []
 
@@ -72,11 +70,26 @@ async function testHooks (name='') {
     fn()
     t.deepEqual(log, [0], 'first')
 
-    await tick()
+    await frame(2)
     fn()
-    await tick()
+    await frame(2)
 
     t.deepEqual(log, [0, 1], 'second')
+
+    t.end()
+  })
+
+  t.skip(name + ': prevent recursion', async t => {
+    let count = 0
+
+    let f = enhook(() => {
+      let [c, setC] = useState(0)
+      count++
+      setC(c => ++c)
+    })
+    f()
+    await time(200)
+    t.is(count, 50)
 
     t.end()
   })
@@ -84,31 +97,33 @@ async function testHooks (name='') {
 
 testHooks()
 testHooks('preact')
+testHooks('augmentor')
 testHooks('react')
 testHooks('rax')
-testHooks('augmentor')
 testHooks('haunted')
 testHooks('atomico')
+
 // testHooks('tng-hooks')
 // testHooks('dom-augmentor')
 // testHooks('neverland')
 // testHooks('fuco')
 // testHooks('fn-with-hooks')
 
-
-t.skip('survival', async t => {
+t('survival', async t => {
   setHooks('preact')
 
   let count = 0
-  let f = enhook(
-    () => useEffect(() => {count++})
-  )
-  let N = 1e6
+  let f = enhook(() => {
+    useEffect(() => {
+      count++
+    })
+  })
+  let N = 1e3
   for (let i = N; i--;) { f() }
 
   await frame(3)
 
-  t.is(count, N)
+  t.ok(count >= 1)
 
   t.end()
 })

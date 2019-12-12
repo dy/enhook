@@ -5,21 +5,24 @@ if (lib) {
   let State = lib.State
 
   enhook = (fn, options={}) => {
-    if (options.passive) throw Error('Passive mode is not supported for haunted')
-
     let state = new State(() => update.call(null))
-    let lastCtx, lastArgs, lastResult
+    let lastCtx, lastArgs, lastResult, blocked, passive = options.passive
 
     function update () {
       state.run(() => {
+        if (passive && blocked) return
+        if (passive) blocked = true
         lastResult = fn.call(lastCtx, ...lastArgs)
       })
-      Promise.resolve().then(() => state.runEffects())
+      Promise.resolve().then(() => {
+        state.runEffects()
+      })
     }
 
     return function hooked (...args) {
       lastCtx = this
       lastArgs = args
+      blocked = false
       update()
       return lastResult
     }

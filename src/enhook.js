@@ -1,13 +1,12 @@
-let queueMicrotask = require('queue-microtask')
-
+let limit = require('./limit')
 let doc = typeof document !== 'undefined' ? document : null
 
-let MAX_RERENDER = 25
 
 module.exports = function enhookRaw(fn, options = {}) {
   let { h, render } = this
   let { passive } = options
-  let count = 0
+
+  fn = limit(fn)
 
   // FIXME: cache by last stacktrace entry
 
@@ -24,20 +23,12 @@ module.exports = function enhookRaw(fn, options = {}) {
     replaceChild() { }
   } : doc.createDocumentFragment()
 
-  let currentResult, currentCtx, currentArgs = [], blocked, rendered
+  let currentResult, currentCtx, currentArgs = [], blocked
 
   function Component() {
-    if (++count >= MAX_RERENDER) throw Error('More than ' + MAX_RERENDER + ' rerenders, likely there\'s infinite recursion')
-    if (passive && blocked === fn) return null
-    currentResult = fn.call(currentCtx, ...currentArgs)
-    if (passive) blocked = fn
-    if (!rendered) {
-      rendered = true
-      queueMicrotask(() => {
-        rendered = false
-        count = 0
-      })
-    }
+    if (passive && blocked) return null
+    if (passive) blocked = true
+    currentResult = fn.apply(currentCtx, currentArgs)
     return null
   }
 
@@ -45,7 +36,8 @@ module.exports = function enhookRaw(fn, options = {}) {
     currentCtx = this
     currentArgs = args
     let prevResult = currentResult
-    if (passive) blocked = null
+    if (passive) blocked = false
+    fn.count = 0
     render(h(Component), holder)
     let result = currentResult
     currentResult = prevResult
