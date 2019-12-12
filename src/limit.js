@@ -8,7 +8,7 @@ module.exports = function limit (fn) {
 
     if (!dirty) {
       dirty = true
-      Promise.resolve.then(() => {
+      Promise.resolve().then(() => {
         dirty = false
         wrapped.count = 0
       })
