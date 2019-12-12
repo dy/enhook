@@ -82,6 +82,30 @@ async function testRecursion(t) {
   t.ok(count < 50, 'prevent recursion')
 }
 
+async function testEffect(t) {
+  let log = []
+  let f1 = enhook(() => {
+    useEffect(() => { log.push(1) })
+  })
+  f1()
+  f1()
+  f1()
+  await frame(4)
+  t.deepEqual(log, [1, 1, 1], 'direct effect is ok')
+
+  log = []
+  let f2 = enhook(() => {
+    useEffect(() => { log.push(1) })
+    let [s, setS] = useState(0)
+    useEffect(() => {setTimeout(() => setS(1))}, [])
+    useEffect(() => {setTimeout(() => setS(2), 15)}, [])
+    useEffect(() => {setTimeout(() => setS(3), 30)}, [])
+  })
+  f2()
+  await time(150)
+  t.deepEqual(log, [1, 1, 1, 1], 'induced effect is ok')
+}
+
 t('auto', async t => {
   setHooks()
   await testContextArgs(t)
@@ -96,6 +120,7 @@ t('preact', async t => {
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
+  await testEffect(t)
   // await testRecursion(t)
   t.end()
 })
@@ -105,6 +130,7 @@ t('augmentor', async t => {
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
+  await testEffect(t)
   // await testRecursion(t)
   t.end()
 })
@@ -113,6 +139,7 @@ t('rax', async t => {
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
+  await testEffect(t)
   // await testRecursion(t)
   t.end()
 })
@@ -121,6 +148,7 @@ t('haunted', async t => {
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
+  await testEffect(t)
   // await testRecursion(t)
   t.end()
 })
@@ -129,6 +157,7 @@ t('atomico', async t => {
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
+  await testEffect(t)
   // await testRecursion(t)
   t.end()
 })
@@ -136,6 +165,7 @@ t('react', async t => {
   setHooks('react')
   await testContextArgs(t)
   await testOrder(t)
+  await testEffect(t)
   // await testPassive(t)
   // await testRecursion(t)
   t.end()

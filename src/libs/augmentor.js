@@ -20,7 +20,6 @@ if (lib) {
         return augmented.apply(this, arguments)
       }
     }
-
   }
   // augmentor@1.1
   else {
