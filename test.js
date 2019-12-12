@@ -147,7 +147,7 @@ t('react', async t => {
 // setHooks('fn-with-hooks')
 
 t('survival', async t => {
-  setHooks('preact')
+  setHooks('augmentor')
 
   let count = 0
   let f = enhook(() => {
@@ -155,12 +155,12 @@ t('survival', async t => {
       count++
     })
   })
-  let N = 1e6
+  let N = 1e4
   for (let i = N; i--;) { f() }
 
   await frame(3)
 
-  t.ok(count >= 1)
+  t.is(count, N)
 
   t.end()
 })
