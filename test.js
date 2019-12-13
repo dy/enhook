@@ -106,11 +106,34 @@ async function testEffect(t) {
   t.deepEqual(log, [1, 1, 1, 1], 'induced effect is ok')
 }
 
+async function testDestruction(t) {
+  let log = []
+  let f = enhook(() => {
+    useEffect(() => {
+      log.push('in')
+      return () => {
+        log.push('out')
+      }
+    })
+  })
+  f()
+  await frame(2)
+  t.deepEqual(log, ['in'], 'in ok')
+  f.unhook()
+  await frame(2)
+  t.deepEqual(log, ['in', 'out'], 'destructor ok')
+
+  f()
+  await frame(2)
+  t.deepEqual(log, ['in', 'out'], 're-destructor ok')
+}
+
 t('auto', async t => {
   setHooks()
   await testContextArgs(t)
   await testOrder(t)
   // await testPassive(t)
+  await testDestruction(t)
   // await testRecursion(t)
   t.end()
 })
@@ -121,6 +144,7 @@ t('preact', async t => {
   await testOrder(t)
   await testPassive(t)
   await testEffect(t)
+  await testDestruction(t)
   // await testRecursion(t)
   t.end()
 })
@@ -131,7 +155,9 @@ t('augmentor', async t => {
   await testOrder(t)
   await testPassive(t)
   await testEffect(t)
+  await testDestruction(t)
   // await testRecursion(t)
+
   t.end()
 })
 t('rax', async t => {
@@ -140,6 +166,7 @@ t('rax', async t => {
   await testOrder(t)
   await testPassive(t)
   await testEffect(t)
+  await testDestruction(t)
   // await testRecursion(t)
   t.end()
 })
@@ -149,6 +176,7 @@ t('haunted', async t => {
   await testOrder(t)
   await testPassive(t)
   await testEffect(t)
+  await testDestruction(t)
   // await testRecursion(t)
   t.end()
 })
@@ -158,6 +186,7 @@ t('atomico', async t => {
   await testOrder(t)
   await testPassive(t)
   await testEffect(t)
+  await testDestruction(t)
   // await testRecursion(t)
   t.end()
 })
@@ -166,6 +195,7 @@ t('react', async t => {
   await testContextArgs(t)
   await testOrder(t)
   await testEffect(t)
+  await testDestruction(t)
   // await testPassive(t)
   // await testRecursion(t)
   t.end()

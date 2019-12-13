@@ -72,6 +72,10 @@ let passiveFn = enhook(() => {
 passiveFn()
 ```
 
+#### `fn.unhook()`
+
+Teardown enhooked function. This will dispose all `useEffect`s. Any subsequent calls to that function will be noop.
+
 <!--
 ```js
 import enhook from 'enhook'

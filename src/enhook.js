@@ -23,7 +23,7 @@ module.exports = function enhookRaw(fn, options = {}) {
     replaceChild() { }
   } : doc.createDocumentFragment()
 
-  let currentResult, currentCtx, currentArgs = [], blocked
+  let currentResult, currentCtx, currentArgs = [], blocked, root, end
 
   function Component() {
     if (passive && blocked) return null
@@ -33,16 +33,24 @@ module.exports = function enhookRaw(fn, options = {}) {
   }
 
   function hookedFn(...args) {
+    if (end) return
     currentCtx = this
     currentArgs = args
     let prevResult = currentResult
     if (passive) blocked = false
     fn.count = 0
-    render(h(Component), holder)
+    root = render(h(Component), holder)
     let result = currentResult
     currentResult = prevResult
     return result
   }
 
+  hookedFn.unhook = () => {
+    end = true
+    render('', holder, root)
+    currentArgs = currentCtx = currentResult = root = null
+  }
+
   return hookedFn
 }
+

@@ -6,7 +6,7 @@ if (lib) {
 
   enhook = (fn, options={}) => {
     let state = new State(() => update.call(null))
-    let lastCtx, lastArgs, lastResult, blocked, passive = options.passive
+    let lastCtx, lastArgs, lastResult, blocked, passive = options.passive, end
 
     function update () {
       state.run(() => {
@@ -19,13 +19,22 @@ if (lib) {
       })
     }
 
-    return function hooked (...args) {
+    function hooked (...args) {
+      if (end) return
       lastCtx = this
       lastArgs = args
       blocked = false
       update()
       return lastResult
     }
+
+    hooked.unhook = () => {
+      end = true
+      state.teardown()
+      state = lastCtx = lastArgs = lastResult = null
+    }
+
+    return hooked
   }
 }
 

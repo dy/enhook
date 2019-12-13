@@ -1,5 +1,5 @@
 let hooker = require('../enhook')
-let lib, h, render, enhook
+let lib, h, render, unrender, enhook
 
 try { lib = require('preact') } catch (e) { }
 if (lib) {
