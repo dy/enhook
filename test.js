@@ -18,12 +18,15 @@ async function testContextArgs(t) {
     useEffect(() => {
       setCount(1)
     }, [])
+
+    return 'result'
   }
 
   let f1 = enhook(f)
 
-  f1.call({ foo: 1 }, { bar: 2 })
+  let res = f1.call({ foo: 1 }, { bar: 2 })
   t.deepEqual(log, [{ foo: 1 }, { bar: 2 }, ['call', 0]], 'context args init')
+  t.deepEqual(res, 'result')
 
   // not sure why preact prefers 3 frames
   await frame(4)

@@ -10,7 +10,7 @@ if (lib) {
     const augmented = augment(function () {
       if (passive && blocked) return
       if (passive) blocked = true
-      fn.apply(ctx, arguments)
+      return fn.apply(ctx, arguments)
     })
 
     function hookedFn(...args) {

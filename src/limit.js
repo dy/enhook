@@ -14,7 +14,7 @@ module.exports = function limit (fn) {
       })
     }
 
-    fn.apply(this, arguments)
+    return fn.apply(this, arguments)
   }
   wrapped.count = 0
 

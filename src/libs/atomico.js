@@ -3,14 +3,14 @@ let enhook, lib
 try { lib = require('atomico') } catch (e) { }
 if (lib) {
   enhook = (fn, options={}) => {
-    let lastCtx, lastArgs, passive = options.passive, blocked, end
+    let lastCtx, lastArgs, passive = options.passive, blocked, end, result
     let hooks = lib.createHookCollection(update)
 
     function update () {
       hooks.load(() => {
         if (passive && blocked) return
         if (passive) blocked = true
-        return fn.call(lastCtx, ...lastArgs)
+        result = fn.call(lastCtx, ...lastArgs)
       }, lastArgs)
       Promise.resolve().then(() => hooks.updated())
     }
@@ -20,6 +20,7 @@ if (lib) {
       lastCtx = this
       lastArgs = args
       update()
+      return result
     }
     render.unhook = () => {
       end = true
