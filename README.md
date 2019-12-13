@@ -49,9 +49,19 @@ setHooks('preact')
 // or setHooks('preact', require('preact/hooks'))
 
 // now enhook uses preact hooks
-let reactiveFn = enhook(() => {
+let fn = enhook(() => {
   let [count, setCount] = useState(0)
+
+  useEffect(() => {
+    let id = setInterval(() => setCount(c => ++c), 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  return count
 })
+
+let count = fn()
+// count === 0
 ```
 
 ## API
@@ -222,7 +232,7 @@ let observable = new Observable(hooked(observer => {
 ## See also
 
 * [unihooks](https://github.com/unihooks/unihooks) - unified all-framework essential hooks collection.
-
+* [spect](https://ghub.io/spect) - aspect-oriented web framework with hooks.
 
 ## License
 
