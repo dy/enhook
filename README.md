@@ -74,7 +74,7 @@ passiveFn()
 
 #### `fn.unhook()`
 
-Teardown enhooked function. This will dispose all `useEffect`s. Any subsequent calls to that function will be noop.
+Teardown enhooked function. This will dispose all `useEffect`s. Any subsequent calls to that function will throw an error.
 
 <!--
 ```js

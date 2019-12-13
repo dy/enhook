@@ -19,8 +19,8 @@ if (lib) {
       })
     }
 
-    function hooked (...args) {
-      if (end) return
+    function hooked(...args) {
+      if (end) throw Error('Function is unhooked')
       lastCtx = this
       lastArgs = args
       blocked = false

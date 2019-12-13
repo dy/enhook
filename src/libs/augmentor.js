@@ -14,7 +14,7 @@ if (lib) {
     })
 
     function hookedFn(...args) {
-      if (end) return
+      if (end) throw Error('Function is unhooked')
       fn.count = 0
       ctx = this
       blocked = false

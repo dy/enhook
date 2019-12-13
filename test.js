@@ -123,9 +123,9 @@ async function testDestruction(t) {
   await frame(2)
   t.deepEqual(log, ['in', 'out'], 'destructor ok')
 
-  f()
-  await frame(2)
-  t.deepEqual(log, ['in', 'out'], 're-destructor ok')
+  t.throws(() => {
+    f()
+  })
 }
 
 t('auto', async t => {

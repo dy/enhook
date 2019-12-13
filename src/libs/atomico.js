@@ -14,8 +14,8 @@ if (lib) {
       }, lastArgs)
       Promise.resolve().then(() => hooks.updated())
     }
-    function render (...args) {
-      if (end) return
+    function render(...args) {
+      if (end) throw Error('Function is unhooked')
       blocked = false
       lastCtx = this
       lastArgs = args

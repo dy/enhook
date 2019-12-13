@@ -33,7 +33,7 @@ module.exports = function enhookRaw(fn, options = {}) {
   }
 
   function hookedFn(...args) {
-    if (end) return
+    if (end) throw Error('Function is unhooked')
     currentCtx = this
     currentArgs = args
     let prevResult = currentResult
