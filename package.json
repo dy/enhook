@@ -16,6 +16,7 @@
     "driver-universal": "^2.0.1",
     "esm": "^3.2.25",
     "fn-with-hooks": "^0.1.1",
+    "fuco": "^1.2.0",
     "haunted": "^4.6.2",
     "parcel": "^1.12.4",
     "preact": "^10.0.4",

@@ -87,14 +87,14 @@ async function testRecursion(t) {
 
 async function testEffect(t) {
   let log = []
-  let f1 = enhook(() => {
-    useEffect(() => { log.push(1) })
-  })
-  f1()
-  f1()
-  f1()
-  await frame(4)
-  t.deepEqual(log, [1, 1, 1], 'direct effect is ok')
+  // let f1 = enhook(() => {
+  //   useEffect(() => { log.push(1) })
+  // })
+  // f1()
+  // f1()
+  // f1()
+  // await frame(4)
+  // t.deepEqual(log, [1, 1, 1], 'direct effect is ok')
 
   log = []
   let f2 = enhook(() => {
@@ -206,7 +206,16 @@ t('react', async t => {
 // setHooks('tng-hooks')
 // setHooks('dom-augmentor')
 // setHooks('neverland')
-// setHooks('fuco')
+t.only('fuco', async t => {
+  setHooks('fuco')
+  // await testContextArgs(t)
+  // await testOrder(t)
+  // await testPassive(t)
+  await testEffect(t)
+  // await testDestruction(t)
+  // await testRecursion(t)
+  t.end()
+})
 // setHooks('fn-with-hooks')
 
 t('survival', async t => {
