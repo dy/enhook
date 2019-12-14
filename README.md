@@ -34,7 +34,7 @@ The framework is detected from the list:
 * [ ] [`dom-augmentor`](https://ghub.io/dom-augmentor)
 * [ ] [`neverland`](https://ghub.io/neverland)
 * [x] [`atomico`](https://ghub.io/atomico)
-* [ ] [`fuco`](https://ghub.io/fuco)
+* [x] [`fuco`](https://ghub.io/fuco)
 * [x] [`tng-hooks`](https://ghub.io/tng-hooks) (passive)
 * [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (passive)
 

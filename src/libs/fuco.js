@@ -1,15 +1,9 @@
-let enhook, lib, render
+let enhook, lib
 let limit = require('../limit')
 
 
-try { lib = require('fuco'); render = require('lit-html').render } catch (e) { }
+try { lib = require('fuco') } catch (e) { }
 if (lib) {
-  const task = (fn) => {
-    const ch = new MessageChannel();
-    ch.port1.onmessage = fn;
-    ch.port2.postMessage(null);
-  }
-
   // unfortunately we have to simulate that manually
   const flushEffects = (hooks, key) => {
     const effects = hooks[key];
@@ -51,11 +45,7 @@ if (lib) {
       }
       el._connected = true
       blocked = false
-      console.log(1, 'in')
       el.performUpdate()
-      task(() => {
-        el._connected = false
-      })
       return result
     }
 

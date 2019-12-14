@@ -2,7 +2,7 @@ import t from 'tape'
 import { frame, time, tick } from 'wait-please'
 import enhook from '.'
 import setHooks, { useEffect, useState, useMemo, useLayoutEffect, current } from 'any-hooks'
-
+import isBrowser from 'is-browser'
 
 async function testContextArgs(t) {
   let log = []
@@ -87,14 +87,14 @@ async function testRecursion(t) {
 
 async function testEffect(t) {
   let log = []
-  // let f1 = enhook(() => {
-  //   useEffect(() => { log.push(1) })
-  // })
-  // f1()
-  // f1()
-  // f1()
-  // await frame(4)
-  // t.deepEqual(log, [1, 1, 1], 'direct effect is ok')
+  let f1 = enhook(() => {
+    useEffect(() => { log.push(1) })
+  })
+  f1()
+  f1()
+  f1()
+  await frame(4)
+  t.deepEqual(log, [1, 1, 1], 'direct effect is ok')
 
   log = []
   let f2 = enhook(() => {
@@ -206,13 +206,13 @@ t('react', async t => {
 // setHooks('tng-hooks')
 // setHooks('dom-augmentor')
 // setHooks('neverland')
-t.only('fuco', async t => {
+isBrowser && t('fuco', async t => {
   setHooks('fuco')
-  // await testContextArgs(t)
-  // await testOrder(t)
-  // await testPassive(t)
+  await testContextArgs(t)
+  await testOrder(t)
+  await testPassive(t)
   await testEffect(t)
-  // await testDestruction(t)
+  await testDestruction(t)
   // await testRecursion(t)
   t.end()
 })
@@ -236,3 +236,6 @@ t('survival', async t => {
 
   t.end()
 })
+
+
+
