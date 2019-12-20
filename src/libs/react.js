@@ -1,4 +1,4 @@
-let hooker = require('../enhook')
+import hooker from '../enhook.js'
 let h, render, enhook
 let lib
 try { lib = require('react') } catch (e) { }
@@ -8,11 +8,14 @@ if (lib) {
 
 try { render = require('react-dom').render } catch (e) { }
 
-if (lib) enhook = (fn, options) => {
-  if (options && options.passive) throw Error('Passive mode is not yet supported for `react`')
-  return hooker.call({h, render}, fn, options)
+// if (lib) enhook = (fn, options) => {
+//   if (options && options.passive) throw Error('Passive mode is not yet supported for `react`')
+//   return hooker.call({h, render}, fn, options)
+// }
+if (lib) {
+  enhook = hooker.bind({ h, render })
+  enhook.useState = lib.useState
 }
-// if (lib) enhook = hooker.bind({ h, render })
 
-module.exports = enhook
+export default enhook
 

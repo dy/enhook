@@ -1,12 +1,14 @@
-let hooker = require('../enhook')
-let lib, h, render, unrender, enhook
+import hooker from '../enhook.js'
 
-try { lib = require('preact') } catch (e) { }
+let lib, h, render, enhook, hooks
+
+try { lib = require('preact'); hooks = require('preact/hooks') } catch (e) { }
 if (lib) {
   h = lib.h
   render = lib.render
   enhook = hooker.bind({ h, render })
+  enhook.useState = hooks.useState
 }
 
-module.exports = enhook
+export default enhook
 

@@ -1,5 +1,5 @@
+import limit from '../limit.js'
 let enhook, lib
-let limit = require('../limit')
 
 
 try { lib = require('fuco') } catch (e) { }
@@ -52,11 +52,13 @@ if (lib) {
     hooked.unhook = () => {
       end = true
       el.disconnectedCallback()
-      state = ctx = args = result = null
+      ctx = args = result = null
     }
 
     return hooked
   }
+
+  enhook.useState = lib.useState
 }
 
-module.exports = enhook
+export default enhook

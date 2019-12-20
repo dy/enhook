@@ -36,6 +36,8 @@ if (lib) {
 
     return hooked
   }
+
+  enhook.useState = lib.useState
 }
 
-module.exports = enhook
+export default enhook

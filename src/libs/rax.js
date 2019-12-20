@@ -1,4 +1,5 @@
-let hooker = require('../enhook')
+import hooker from '../enhook.js'
+
 let h, render, lib, driver, enhook
 
 try { lib = require('rax') } catch (e) { }
@@ -12,6 +13,8 @@ if (lib) {
   h = lib.createElement
   render = (what, where) => lib.render(what, where, { driver })
   enhook = hooker.bind({ h, render })
+
+  enhook.useState = lib.useState
 }
 
-module.exports = enhook
+export default enhook

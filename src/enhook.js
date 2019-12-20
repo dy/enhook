@@ -1,8 +1,7 @@
-let limit = require('./limit')
+import limit from './limit.js'
 let doc = typeof document !== 'undefined' ? document : null
 
-
-module.exports = function enhookRaw(fn, options = {}) {
+export default function enhookRaw(fn, options = {}) {
   let { h, render } = this
   let { passive } = options
 

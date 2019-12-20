@@ -30,6 +30,8 @@ if (lib) {
 
     return render
   }
+
+  enhook.useState = lib.useState
 }
 
-module.exports = enhook
+export default enhook

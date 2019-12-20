@@ -2,9 +2,9 @@
   "name": "enhook",
   "version": "2.2.0",
   "description": "Enable react/preact/etc hooks for regular functions",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
-    "any-hooks": "^2.3.0"
+    "any-hooks": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -14,26 +14,27 @@
     "browser-env": "^3.3.0",
     "driver-dom": "^2.0.2",
     "driver-universal": "^2.0.1",
+    "es-dev-server": "^1.32.0",
     "esm": "^3.2.25",
     "fn-with-hooks": "^0.1.1",
     "fuco": "^1.2.0",
     "haunted": "^4.6.2",
-    "is-browser": "^2.1.0",
     "parcel": "^1.12.4",
     "preact": "^10.0.4",
     "rax": "^1.0.13",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-test-renderer": "^16.11.0",
-    "tape": "^4.11.0",
     "tng-hooks": "^4.1.5",
-    "wait-please": "^1.1.0"
+    "tst": "^4.2.3",
+    "wait-please": "^3.0.0"
   },
   "browserslist": [
     "last 1 Chrome versions"
   ],
   "scripts": {
     "start": "parcel serve --no-hmr test.html",
+    "start:esm": "es-dev-server --node-resolve --dedupe",
     "test": "node -r esm -r ./fix-test.js  test"
   },
   "repository": {

@@ -1,8 +1,8 @@
-import t from 'tape'
+import t from 'tst'
 import { frame, time, tick } from 'wait-please'
-import enhook from '.'
-import setHooks, { useEffect, useState, useMemo, useLayoutEffect, current } from 'any-hooks'
-import isBrowser from 'is-browser'
+import enhook from './src'
+import setHooks, { useEffect, useState, useMemo, useLayoutEffect } from 'any-hooks'
+
 
 async function testContextArgs(t) {
   let log = []
@@ -141,6 +141,22 @@ t('auto', async t => {
   t.end()
 })
 
+t.only('manual', async t => {
+  // let hooks = await import('preact/hooks')
+  // let preact = await import('preact')
+  // setHooks(hooks)
+  // enhook.use(preact)
+  let hooks = await import('augmentor')
+  setHooks(hooks)
+  enhook.use(hooks.augmentor)
+  await testContextArgs(t)
+  await testOrder(t)
+  // await testPassive(t)
+  await testDestruction(t)
+  // await testRecursion(t)
+  t.end()
+})
+
 t('preact', async t => {
   setHooks('preact')
   await testContextArgs(t)
@@ -206,7 +222,7 @@ t('react', async t => {
 // setHooks('tng-hooks')
 // setHooks('dom-augmentor')
 // setHooks('neverland')
-isBrowser && t('fuco', async t => {
+t.browser('fuco', async t => {
   setHooks('fuco')
   await testContextArgs(t)
   await testOrder(t)

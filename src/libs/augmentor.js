@@ -1,5 +1,5 @@
+import limit from '../limit.js'
 let enhook, lib
-let limit = require('../limit')
 
 try { lib = require('augmentor') } catch (e) { }
 if (lib) {
@@ -29,6 +29,8 @@ if (lib) {
 
     return hookedFn
   }
+
+  enhook.useState = lib.useState
 }
 
-module.exports = enhook
+export default enhook
