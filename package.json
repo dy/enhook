@@ -4,7 +4,7 @@
   "description": "Enable react/preact/etc hooks for regular functions",
   "main": "src/index.js",
   "dependencies": {
-    "any-hooks": "^3.0.1"
+    "any-hooks": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -20,18 +20,21 @@
     "fuco": "^1.2.0",
     "haunted": "^4.6.2",
     "parcel": "^1.12.4",
-    "preact": "^10.0.4",
+    "preact": "^10.1.1",
     "rax": "^1.0.13",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-test-renderer": "^16.11.0",
     "tng-hooks": "^4.1.5",
-    "tst": "^4.2.3",
+    "tst": "^5.0.6",
     "wait-please": "^3.0.0"
   },
   "browserslist": [
     "last 1 Chrome versions"
   ],
+  "esm": {
+    "force": true
+  },
   "scripts": {
     "start": "parcel serve --no-hmr test.html",
     "start:esm": "es-dev-server --node-resolve --dedupe",

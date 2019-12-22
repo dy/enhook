@@ -1,6 +1,6 @@
 import t from 'tst'
 import { frame, time, tick } from 'wait-please'
-import enhook from './src'
+import enhook from '.'
 import setHooks, { useEffect, useState, useMemo, useLayoutEffect } from 'any-hooks'
 
 
@@ -131,24 +131,7 @@ async function testDestruction(t) {
   })
 }
 
-t('auto', async t => {
-  setHooks()
-  await testContextArgs(t)
-  await testOrder(t)
-  // await testPassive(t)
-  await testDestruction(t)
-  // await testRecursion(t)
-  t.end()
-})
-
-t.only('manual', async t => {
-  // let hooks = await import('preact/hooks')
-  // let preact = await import('preact')
-  // setHooks(hooks)
-  // enhook.use(preact)
-  let hooks = await import('augmentor')
-  setHooks(hooks)
-  enhook.use(hooks.augmentor)
+t.require('auto', async t => {
   await testContextArgs(t)
   await testOrder(t)
   // await testPassive(t)
@@ -158,7 +141,11 @@ t.only('manual', async t => {
 })
 
 t('preact', async t => {
-  setHooks('preact')
+  let hooks = await import('preact/hooks')
+  let preact = await import('preact')
+  setHooks(hooks)
+  enhook.use(preact)
+
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
@@ -169,7 +156,9 @@ t('preact', async t => {
 })
 
 t('augmentor', async t => {
-  setHooks('augmentor')
+  let augmentor = await import('augmentor')
+  enhook.use(augmentor)
+  setHooks(augmentor)
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
@@ -179,8 +168,11 @@ t('augmentor', async t => {
 
   t.end()
 })
-t('rax', async t => {
-  setHooks('rax')
+t.require('rax', async t => {
+  let [rax, driver] = await Promise.all([import('rax'), import('driver-dom')])
+  setHooks(rax)
+  enhook.use(rax, driver)
+
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
@@ -190,7 +182,10 @@ t('rax', async t => {
   t.end()
 })
 t('haunted', async t => {
-  setHooks('haunted')
+  let haunted = await import('haunted')
+  setHooks(haunted)
+  enhook.use(haunted)
+
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
@@ -200,7 +195,10 @@ t('haunted', async t => {
   t.end()
 })
 t('atomico', async t => {
-  setHooks('atomico')
+  let atomico = await import('atomico')
+  setHooks(atomico)
+  enhook.use(atomico)
+
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
@@ -209,8 +207,11 @@ t('atomico', async t => {
   // await testRecursion(t)
   t.end()
 })
-t('react', async t => {
-  setHooks('react')
+t.require('react', async t => {
+  let [react, reactDom] = await Promise.all([import('react'), import('react-dom')])
+  setHooks(react)
+  enhook.use(react, reactDom)
+
   await testContextArgs(t)
   await testOrder(t)
   await testEffect(t)
@@ -223,7 +224,10 @@ t('react', async t => {
 // setHooks('dom-augmentor')
 // setHooks('neverland')
 t.browser('fuco', async t => {
-  setHooks('fuco')
+  let fuco = await import('fuco')
+  setHooks(fuco)
+  enhook.use(fuco)
+
   await testContextArgs(t)
   await testOrder(t)
   await testPassive(t)
@@ -235,7 +239,9 @@ t.browser('fuco', async t => {
 // setHooks('fn-with-hooks')
 
 t('survival', async t => {
-  setHooks('augmentor')
+  let augmentor = await import('augmentor')
+  setHooks(augmentor)
+  enhook.use(augmentor)
 
   let count = 0
   let f = enhook(() => {
@@ -243,7 +249,7 @@ t('survival', async t => {
       count++
     })
   })
-  let N = 1e4
+  let N = 1e5
   for (let i = N; i--;) { f() }
 
   await frame(3)

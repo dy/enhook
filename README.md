@@ -22,47 +22,40 @@ let countFrom = enableHooks(initCount => {
 countFrom(0)
 ```
 
-_Enhook_ turns any function into reactive function with enabled hooks. Unlike [augmentor](https://ghub.io/augmentor) or similar standalone hooks providers, enhook uses installed framework hooks via [any-hooks](https://ghub.io/any-hooks).
-
-The framework is detected from the list:
+_Enhook_ turns any function into reactive function with enabled hooks for a given framework.
+The framework is by default detected from the list:
 
 * [x] [`react`](https://ghub.io/react)
 * [x] [`preact`](https://ghub.io/preact)
 * [x] [`rax`](https://ghub.io/rax)
 * [x] [`haunted`](https://ghub.io/haunted)
 * [x] [`augmentor`](https://ghub.io/augmentor)
-* [ ] [`dom-augmentor`](https://ghub.io/dom-augmentor)
-* [ ] [`neverland`](https://ghub.io/neverland)
 * [x] [`atomico`](https://ghub.io/atomico)
 * [x] [`fuco`](https://ghub.io/fuco)
 * [x] [`tng-hooks`](https://ghub.io/tng-hooks) (passive)
-* [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (passive)
+<!-- * [ ] [`dom-augmentor`](https://ghub.io/dom-augmentor) -->
+<!-- * [ ] [`neverland`](https://ghub.io/neverland) -->
+<!-- * [ ] [`fn-with-hooks`](https://ghub.io/fn-with-hooks) (passive) -->
 
 
-Custom hooks provider can be set via _any-hooks_:
+In case of ES modules autodetection is not available (until `import.meta.resolve()` or `await import()` is available), you have to manually indicate framework to use.
 
 ```js
+import preact from 'preact'
+import preactHooks from 'preact/hooks'
 import enhook from 'enhook'
-import setHooks, { useState, useEffect } from 'any-hooks'
+import setHooks, { useState } from 'any-hooks'
 
-setHooks('preact')
-// or setHooks('preact', require('preact/hooks'))
+enhook.use(preact) // or enhook.use(React, ReactDOM)
+setHooks(preactHooks)
 
-// now enhook uses preact hooks
+// now enhook uses preact with  as base
 let fn = enhook(() => {
   let [count, setCount] = useState(0)
-
-  useEffect(() => {
-    let id = setInterval(() => setCount(c => ++c), 1000)
-    return () => clearInterval(id)
-  }, [])
-
-  return count
+  //...
 })
-
-let count = fn()
-// count === 0
 ```
+
 
 ## API
 
@@ -74,35 +67,20 @@ Create function wrapper, allowing hooks in function body. `passive` option may d
 import enhook from 'enhook'
 import { useState } from 'any-hooks'
 
-let passiveFn = enhook(() => {
+let passiveFn = enhook((i) => {
   let [count, setCount] = useState(0)
+
+  // this does not cause self-recursion in passive mode
+  setCount(i)
 }, { passive: true })
 
-// this does not call self-recursion
-passiveFn()
+passiveFn(1)
+passiveFn(2)
 ```
 
 #### `fn.unhook()`
 
 Teardown enhooked function. This will dispose all `useEffect`s. Any subsequent calls to that function will throw an error.
-
-<!--
-```js
-import enhook from 'enhook'
-
-// known hooks
-enhook.bind('preact')
-
-// custom enhook function
-enhook.use(require('augmentor').contextual)
-
-// custom vdom with hooks
-enhook.use({ render, h })
-
-// auto detection
-enhook.use(null)
-```
--->
 
 <!--
 ## Use-cases
@@ -232,7 +210,6 @@ let observable = new Observable(hooked(observer => {
 ## See also
 
 * [unihooks](https://github.com/unihooks/unihooks) - unified all-framework essential hooks collection.
-* [spect](https://ghub.io/spect) - aspect-oriented web framework with hooks.
 
 ## License
 
