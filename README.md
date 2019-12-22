@@ -41,7 +41,7 @@ The framework is by default detected from the list:
 In case of ES modules autodetection is not available (until `import.meta.resolve()` or `await import()` is available), you have to manually indicate framework to use.
 
 ```js
-import preact from 'preact'
+import * as preact from 'preact'
 import preactHooks from 'preact/hooks'
 import enhook from 'enhook'
 import setHooks, { useState } from 'any-hooks'
