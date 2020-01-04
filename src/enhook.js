@@ -45,9 +45,11 @@ export default function enhookRaw(fn, options = {}) {
   }
 
   hookedFn.unhook = () => {
-    end = true
-    render('', holder, root)
-    currentArgs = currentCtx = currentResult = root = null
+    Promise.resolve().then(() => {
+      render('', holder, root)
+      end = true
+      currentArgs = currentCtx = currentResult = root = null
+    }, 10)
   }
 
   return hookedFn

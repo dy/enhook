@@ -23,11 +23,11 @@ export default function enhookHaunted (fn, options={}) {
     return lastResult
   }
 
-  hooked.unhook = () => {
+  hooked.unhook = () => Promise.resolve().then(() => {
     end = true
     state.teardown()
     state = lastCtx = lastArgs = lastResult = null
-  }
+  })
 
   return hooked
 }

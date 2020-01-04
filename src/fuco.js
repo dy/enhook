@@ -50,11 +50,11 @@ export default function enhookFuco (fn, options={}) {
     return result
   }
 
-  hooked.unhook = () => {
+  hooked.unhook = () => requestAnimationFrame(() => {
     end = true
     el.disconnectedCallback()
     ctx = args = result = null
-  }
+  })
 
   return hooked
 }

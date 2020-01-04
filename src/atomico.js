@@ -22,11 +22,13 @@ export default function enhookAtomico (fn, options = {}) {
     update()
     return result
   }
-  render.unhook = () => {
+
+  // microtask needed for atomico unmount to fire in
+  render.unhook = () => Promise.resolve().then(() => {
     end = true
     hooks.unmount()
     lastCtx = lastArgs = null
-  }
+  })
 
   return render
 }

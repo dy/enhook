@@ -111,24 +111,35 @@ async function testEffect(t) {
 
 async function testDestruction(t) {
   let log = []
-  let f = enhook(() => {
+  let fn = () => {
+    let [a, set] = useState()
     useEffect(() => {
       log.push('in')
       return () => {
         log.push('out')
       }
     })
-  })
-  f()
+  }
+  let f1 = enhook(fn)
+  f1()
   await frame(2)
   t.deepEqual(log, ['in'], 'in ok')
-  f.unhook()
+  f1.unhook()
   await frame(2)
   t.deepEqual(log, ['in', 'out'], 'destructor ok')
 
   t.throws(() => {
-    f()
+    f1()
   })
+
+  log = []
+  let f2 = enhook(fn)
+  f2()
+  f2.unhook()
+  await frame(2)
+  t.ok(log + '' === 'in,out' || log + '' === '', 'destructor ok')
+
+  t.end()
 }
 
 t.require('auto', async t => {
