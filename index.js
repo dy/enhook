@@ -29,7 +29,7 @@ export default function enhook() {
   if (lib.h) {
     return enhookStandard.apply(lib, arguments)
   }
-  if (lib.length) {
+  if (Array.isArray(lib)) {
     // rax
     if (lib[0].shared) {
       return enhookRax.apply(lib, arguments)
